@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SubNav from '../../components/SubNav.astro';
+import FacetCard from '../../components/FacetCard.astro';
+import { NAV, FACETS } from '../../data/site';
+
+const programsNav = NAV.find((n) => n.label === 'Programs')!.children!;
+---
+
+<Layout
+  title="Programs"
+  description="The five national program facets of The Links, Incorporated as delivered by the Jacksonville (FL) Chapter: Services to Youth, The Arts, National Trends, International Trends & Services, and Health and Human Services."
+>
+  <PageHero
+    eyebrow="Programs"
+    title="Five Facets of Service"
+    lede="Links members contribute more than 1 million documented hours of community service annually. In Jacksonville, that service takes shape across five national program facets."
+  />
+  <SubNav items={programsNav} />
+
+  <section class="section">
+    <div class="container facets__grid" data-reveal-group>
+      {FACETS.map((facet, i) => <FacetCard facet={facet} index={i} />)}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .facets__grid {
+    display: grid;
+    gap: 1.75rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 800px) {
+    .facets__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .facets__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

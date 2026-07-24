@@ -1,0 +1,237 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroCarousel from '../components/HeroCarousel.astro';
+import FacetCard from '../components/FacetCard.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+import { SITE, FACETS, CHAPTER_MEMBERS } from '../data/site';
+---
+
+<Layout
+  title="Home"
+  description="The Jacksonville (FL) Chapter of The Links, Incorporated — professional women united in friendship and service since 1966. Building. Better. Together."
+  transparentHeader
+>
+  <HeroCarousel />
+
+  <section class="stats section--tight">
+    <div class="container stats__grid" data-reveal-group>
+      <div class="stats__item">
+        <span class="stats__num">{new Date().getFullYear() - SITE.founded}+</span>
+        <span class="stats__label">Years of Service</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__num">5</span>
+        <span class="stats__label">Program Facets</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__num">$150K+</span>
+        <span class="stats__label">Donated to Local Organizations</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__num">{CHAPTER_MEMBERS.length}</span>
+        <span class="stats__label">Active Chapter Members</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section facets" id="facets">
+    <div class="container">
+      <div class="facets__intro">
+        <p class="eyebrow" data-reveal>What We Do</p>
+        <h2 data-reveal>Five Facets, One Mission</h2>
+        <p class="lede" data-reveal>
+          Every Jacksonville Links program lives within five national program facets —
+          the pillars that guide our service to youth, the arts, and the health and
+          well-being of our community, at home and abroad.
+        </p>
+      </div>
+      <div class="facets__grid" data-reveal-group>
+        {FACETS.map((facet, i) => <FacetCard facet={facet} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section president">
+    <div class="container president__grid">
+      <div class="president__media" data-reveal>
+        <PlaceholderImage label="Portrait of President Marti Forchion Chapman" ratio="4/5" rounded="lg" variant={3} />
+      </div>
+      <div class="president__copy" data-reveal>
+        <p class="eyebrow">A Message From Our President</p>
+        <blockquote class="president__quote">
+          <span class="president__dropcap" aria-hidden="true">I</span>t is truly an honor and a privilege to
+          serve as President of this dynamic and dedicated group of professional women.
+          Guided by the core values of friendship and service, we work within five key
+          program areas to build a better Jacksonville — together.
+        </blockquote>
+        <p class="president__sign">
+          <strong>{SITE.president}</strong><br />
+          President, {SITE.name}
+        </p>
+        <p class="president__motto">&ldquo;{SITE.motto}&rdquo;</p>
+        <a href="/our-chapter/president/" class="btn btn--outline">Read the Full Welcome</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="container cta-band__inner" data-reveal>
+      <div>
+        <p class="eyebrow" style="color: var(--color-gold-light);">Get Involved</p>
+        <h2>Join Us in Friendship and Service</h2>
+        <p class="lede" style="color: rgba(255,255,255,0.85);">
+          Learn about upcoming fundraisers, chapter events, and how to connect with the
+          Jacksonville Chapter of The Links, Incorporated.
+        </p>
+      </div>
+      <div class="cta-band__actions">
+        <a href="/fundraisers/" class="btn btn--primary">Upcoming Fundraisers</a>
+        <a href="/contact/" class="btn btn--ghost">Contact the Chapter</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .stats {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .stats__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stats__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .stats__num {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    color: var(--color-forest);
+  }
+
+  .stats__label {
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-body);
+    opacity: 0.75;
+  }
+
+  .facets__intro {
+    max-width: 720px;
+    margin-bottom: 3rem;
+  }
+
+  .facets__grid {
+    display: grid;
+    gap: 1.75rem;
+    grid-template-columns: 1fr;
+  }
+
+  .president {
+    background: var(--color-cream-dim);
+  }
+
+  .president__grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .president__media {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+
+  .president__quote {
+    margin: 0 0 1.5rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    line-height: 1.45;
+    color: var(--color-ink);
+    font-weight: 500;
+    max-width: 46ch;
+  }
+
+  .president__dropcap {
+    float: left;
+    font-size: 3.4rem;
+    line-height: 0.8;
+    padding-right: 0.12em;
+    padding-top: 0.08em;
+    color: var(--color-gold);
+    font-weight: 600;
+  }
+
+  .president__sign {
+    margin-bottom: 0.5rem;
+  }
+
+  .president__motto {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--color-emerald);
+    margin-bottom: 1.75rem;
+  }
+
+  .cta-band {
+    background: linear-gradient(135deg, var(--color-forest-deep), var(--color-forest));
+    color: var(--color-white);
+  }
+
+  .cta-band__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .cta-band h2 {
+    color: var(--color-white);
+  }
+
+  .cta-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .stats__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  @media (min-width: 800px) {
+    .facets__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 900px) {
+    .president__grid {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .facets__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .cta-band__inner {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+</style>

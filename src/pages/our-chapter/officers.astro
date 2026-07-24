@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SubNav from '../../components/SubNav.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+import { NAV, OFFICERS } from '../../data/site';
+
+const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
+---
+
+<Layout
+  title="Officers"
+  description="Meet the elected and appointed officers leading the Jacksonville (FL) Chapter of The Links, Incorporated."
+>
+  <PageHero eyebrow="Our Chapter" title="2025–2026 Chapter Officers" />
+  <SubNav items={ourChapterNav} />
+
+  <section class="section">
+    <div class="container">
+      <ul class="officer-grid" data-reveal-group>
+        {OFFICERS.map((officer, i) => (
+          <li class="officer-card">
+            <PlaceholderImage
+              label={officer.name === 'To Be Announced' ? `${officer.title} headshot` : `Portrait of ${officer.name}`}
+              ratio="1/1"
+              rounded="full"
+              variant={((i % 4) + 1) as 1 | 2 | 3 | 4}
+              class="officer-card__photo"
+            />
+            <h3>{officer.name}</h3>
+            <p>{officer.title}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="officer-note">
+        Officer headshots and remaining board names shown as placeholders pending updated
+        photography and roster confirmation from the chapter.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .officer-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 2rem;
+  }
+
+  .officer-card {
+    text-align: center;
+  }
+
+  .officer-card :global(.officer-card__photo) {
+    max-width: 160px;
+    margin-inline: auto;
+    margin-bottom: 1rem;
+  }
+
+  .officer-card h3 {
+    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+  }
+
+  .officer-card p {
+    margin: 0;
+    color: var(--color-emerald);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .officer-note {
+    margin-top: 3rem;
+    font-size: 0.85rem;
+    color: var(--color-body);
+    opacity: 0.75;
+    max-width: 60ch;
+  }
+</style>

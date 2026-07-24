@@ -1,0 +1,85 @@
+---
+interface Member {
+  name: string;
+  note?: string;
+}
+interface Props {
+  members: Member[];
+}
+const { members } = Astro.props;
+
+function initials(name: string) {
+  const parts = name.replace(/[^A-Za-z\s-]/g, '').split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return '?';
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+---
+
+<ul class="member-grid" data-reveal-group>
+  {members.map((m) => (
+    <li class="member-card">
+      <span class="member-card__avatar" aria-hidden="true">{initials(m.name)}</span>
+      <span class="member-card__name">{m.name}</span>
+      {m.note && <span class="member-card__note">{m.note}</span>}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .member-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem;
+  }
+
+  .member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.65rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1rem;
+    transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
+  }
+
+  .member-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+    border-color: transparent;
+  }
+
+  .member-card__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-emerald), var(--color-forest));
+    color: var(--color-gold-light);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .member-card__name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .member-card__note {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-weight: 700;
+  }
+</style>

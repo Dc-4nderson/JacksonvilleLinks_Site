@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SubNav from '../../components/SubNav.astro';
+import MemberGrid from '../../components/MemberGrid.astro';
+import { NAV, CHAPTER_MEMBERS } from '../../data/site';
+
+const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
+const members = CHAPTER_MEMBERS.map((name) => ({ name }));
+---
+
+<Layout
+  title="Chapter Members"
+  description="Meet the members of the Jacksonville (FL) Chapter of The Links, Incorporated."
+>
+  <PageHero
+    eyebrow="Our Chapter"
+    title="Chapter Members"
+    lede={`${CHAPTER_MEMBERS.length} accomplished women united in friendship and service.`}
+  />
+  <SubNav items={ourChapterNav} />
+
+  <section class="section">
+    <div class="container">
+      <MemberGrid members={members} />
+    </div>
+  </section>
+</Layout>

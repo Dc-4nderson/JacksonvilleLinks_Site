@@ -1,0 +1,244 @@
+---
+import { SITE } from '../data/site';
+
+const slides = [
+  { label: 'Chapter members at a community service event', variant: 1 },
+  { label: 'Links members celebrating at a chapter gala', variant: 3 },
+  { label: 'Youth mentees with Links volunteers', variant: 2 },
+];
+---
+
+<section class="hero" aria-label="Welcome">
+  <div class="hero__slides" role="group" aria-roledescription="carousel" aria-label="Chapter photos">
+    {slides.map((slide, i) => (
+      <div class:list={['hero__slide', `hero__slide--v${slide.variant}`]} data-slide={i} aria-hidden={i === 0 ? 'false' : 'true'}>
+        <span class="hero__slide-badge">Placeholder — {slide.label}</span>
+      </div>
+    ))}
+  </div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="hero__content container">
+    <p class="hero__eyebrow" data-reveal>Jacksonville (FL) Chapter &middot; The Links, Incorporated &middot; Est. {SITE.founded}</p>
+    <h1 class="hero__headline" data-reveal>{SITE.tagline}</h1>
+    <p class="hero__sub lede" data-reveal>
+      Sixty years of friendship and service — a chapter of professional women transforming
+      lives in Jacksonville through the arts, education, health, and civic impact.
+    </p>
+    <div class="hero__actions" data-reveal>
+      <a href="/our-chapter/" class="btn btn--primary">Discover Our Chapter</a>
+      <a href="/programs/" class="btn btn--ghost">Explore Our Programs</a>
+    </div>
+  </div>
+
+  <div class="hero__dots" role="tablist" aria-label="Slide selector">
+    {slides.map((_, i) => (
+      <button class="hero__dot" data-dot={i} aria-label={`Show slide ${i + 1}`} aria-selected={i === 0 ? 'true' : 'false'} role="tab"></button>
+    ))}
+  </div>
+
+  <a href="#facets" class="hero__scroll-cue" aria-label="Scroll to programs">
+    <span></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--color-white);
+    margin-top: calc(var(--header-h) * -1);
+  }
+
+  .hero__slides {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.6s ease-in-out;
+    animation: kenburns 18s ease-in-out infinite;
+  }
+
+  .hero__slide[aria-hidden='false'] {
+    opacity: 1;
+  }
+
+  .hero__slide--v1 { background: linear-gradient(140deg, #2d6a4f, #16352a 70%); }
+  .hero__slide--v2 { background: linear-gradient(150deg, #1b4332, #274d3b 55%, #0e2019); }
+  .hero__slide--v3 { background: linear-gradient(155deg, #274d3b, #1b4332 40%, #c9a961 175%); }
+
+  @keyframes kenburns {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.09); }
+    100% { transform: scale(1); }
+  }
+
+  .hero__slide-badge {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.85);
+    padding: 0.4em 0.8em;
+    border-radius: 999px;
+  }
+
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(9, 22, 17, 0.92) 0%, rgba(9, 22, 17, 0.55) 42%, rgba(9, 22, 17, 0.35) 65%, rgba(9, 22, 17, 0.55) 100%);
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    padding-bottom: clamp(4rem, 10vw, 7rem);
+    padding-top: calc(var(--header-h) + 2rem);
+    max-width: 900px;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gold-light);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero__headline {
+    color: var(--color-white);
+    margin-bottom: 0.55em;
+  }
+
+  .hero__sub {
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 56ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .hero__dots {
+    position: absolute;
+    right: clamp(1.25rem, 4vw, 3rem);
+    bottom: clamp(2rem, 6vw, 3.5rem);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .hero__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  }
+
+  .hero__dot[aria-selected='true'] {
+    background: var(--color-gold);
+    border-color: var(--color-gold);
+    transform: scale(1.2);
+  }
+
+  .hero__scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 1.75rem;
+    transform: translateX(-50%);
+    z-index: 2;
+    width: 26px;
+    height: 42px;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    display: none;
+  }
+
+  .hero__scroll-cue span {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-gold);
+    animation: scrollcue 1.8s ease-in-out infinite;
+  }
+
+  @keyframes scrollcue {
+    0% { opacity: 1; top: 8px; }
+    70% { opacity: 0; top: 20px; }
+    100% { opacity: 0; top: 20px; }
+  }
+
+  @media (min-width: 700px) {
+    .hero__scroll-cue {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__slide {
+      animation: none;
+    }
+    .hero__scroll-cue span {
+      animation: none;
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('.hero__slide'));
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.hero__dot'));
+  let active = 0;
+  let timer: ReturnType<typeof setInterval>;
+
+  function show(i: number) {
+    slides.forEach((s, idx) => s.setAttribute('aria-hidden', idx === i ? 'false' : 'true'));
+    dots.forEach((d, idx) => d.setAttribute('aria-selected', idx === i ? 'true' : 'false'));
+    active = i;
+  }
+
+  function next() {
+    show((active + 1) % slides.length);
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (slides.length > 1 && !reduceMotion) {
+    timer = setInterval(next, 6000);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      show(i);
+      if (timer) {
+        clearInterval(timer);
+        timer = setInterval(next, 6000);
+      }
+    });
+  });
+</script>

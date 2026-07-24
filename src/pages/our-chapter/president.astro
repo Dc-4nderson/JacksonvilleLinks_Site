@@ -1,0 +1,116 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SubNav from '../../components/SubNav.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+import { NAV, SITE } from '../../data/site';
+
+const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
+---
+
+<Layout
+  title="Message From The President"
+  description={`A welcome message from ${SITE.president}, President of the Jacksonville (FL) Chapter of The Links, Incorporated.`}
+>
+  <PageHero eyebrow="Our Chapter" title="Message From The President" />
+  <SubNav items={ourChapterNav} />
+
+  <section class="section">
+    <div class="container letter-grid">
+      <div class="letter-grid__portrait" data-reveal>
+        <PlaceholderImage label={`Portrait of President ${SITE.president}`} ratio="4/5" rounded="lg" variant={3} />
+        <p class="letter-grid__caption">
+          <strong>{SITE.president}</strong><br />
+          President, {SITE.name}
+        </p>
+      </div>
+      <div class="letter-grid__body" data-reveal>
+        <p class="letter-grid__dropcap-para">
+          <span class="dropcap" aria-hidden="true">I</span>t is truly an honor and a privilege to serve as
+          President of this dynamic and dedicated group of professional women. For nearly six decades, the
+          Jacksonville (FL) Chapter of The Links, Incorporated has stood as a beacon of friendship and service in
+          our community, and I am humbled to help carry that legacy forward.
+        </p>
+        <p>
+          Guided by the core values of friendship and service, our members give their time, talent, and resources
+          within five key program facets: Services to Youth, The Arts, National Trends and Services, International
+          Trends and Services, and Health and Human Services. Through these facets, we design and deliver programs
+          that meet real needs — from mentoring and college readiness for our youth, to health equity initiatives,
+          to cultural and artistic enrichment across Jacksonville.
+        </p>
+        <p>
+          Our chapter's story began on November 12, 1966, when fifteen visionary women chartered the Jacksonville
+          Chapter as the Southern Area's 27th chapter. Since then, our members have contributed hundreds of
+          thousands of dollars and countless volunteer hours to organizations and individuals throughout our
+          community. That legacy is one I am proud to protect and grow.
+        </p>
+        <p>
+          On behalf of the Jacksonville Chapter, thank you for visiting our website and for your interest in our
+          work. I invite you to explore our history, meet our members, and learn more about the programs that
+          define who we are.
+        </p>
+        <p class="letter-grid__motto">In Friendship and Service,</p>
+        <p class="letter-grid__signature">{SITE.president}<br /><span>President</span></p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .letter-grid {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .letter-grid__portrait {
+    max-width: 340px;
+  }
+
+  .letter-grid__caption {
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    text-align: center;
+  }
+
+  .letter-grid__body {
+    max-width: 66ch;
+  }
+
+  .dropcap {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 4.2rem;
+    line-height: 0.78;
+    padding: 0.06em 0.1em 0 0;
+    color: var(--color-gold);
+    font-weight: 600;
+  }
+
+  .letter-grid__motto {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--color-emerald);
+    margin-bottom: 0.25rem;
+  }
+
+  .letter-grid__signature {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .letter-grid__signature span {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--color-body);
+  }
+
+  @media (min-width: 900px) {
+    .letter-grid {
+      grid-template-columns: 320px 1fr;
+    }
+  }
+</style>

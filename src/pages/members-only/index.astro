@@ -1,0 +1,175 @@
+---
+// NOTE FOR THE CLIENT: this is a UI-only "gate" — static sites cannot
+// truly password-protect a page (the Handbook/Calendar stub pages remain
+// reachable by direct URL). Before real member content goes here, wire up
+// real access control (e.g. host-level HTTP auth, Netlify/Vercel password
+// protection, or a login-gated member portal).
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/site';
+---
+
+<Layout
+  title="Members Only"
+  description="Member resources for the Jacksonville (FL) Chapter of The Links, Incorporated, including the Chapter Handbook and Links Calendar."
+>
+  <PageHero eyebrow="Members Only" title="Chapter Member Resources" lede="This area is reserved for Jacksonville Links members." />
+
+  <section class="section gate-section">
+    <div class="container gate">
+      <div class="gate__card" data-reveal>
+        <span class="gate__icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M7 10V7a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <h2>Member Access</h2>
+        <p>
+          The Chapter Handbook and Links Calendar are reserved for current members of the
+          Jacksonville (FL) Chapter. Enter the chapter password to continue.
+        </p>
+        <form class="gate__form" id="gate-form">
+          <label for="gate-password" class="visually-hidden">Chapter Password</label>
+          <input type="password" id="gate-password" name="password" placeholder="Enter chapter password" autocomplete="off" />
+          <button type="submit" class="btn btn--primary">Continue</button>
+        </form>
+        <p class="gate__help">
+          Don't have the password? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> to request access.
+        </p>
+      </div>
+
+      <div class="gate__resources" id="gate-resources" hidden data-reveal>
+        <p class="eyebrow">Member Resources</p>
+        <div class="gate__links">
+          <a class="gate__link" href="/members-only/handbook/">
+            <h3>Chapter Handbook</h3>
+            <p>Chapter policies, procedures, and member guidelines.</p>
+            <span>View Handbook →</span>
+          </a>
+          <a class="gate__link" href="/members-only/calendar/">
+            <h3>Links Calendar</h3>
+            <p>Upcoming chapter meetings, events, and program dates.</p>
+            <span>View Calendar →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .gate-section {
+    background: linear-gradient(180deg, var(--color-cream-dim), var(--color-cream));
+  }
+
+  .gate {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .gate__card {
+    max-width: 480px;
+    width: 100%;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    text-align: center;
+  }
+
+  .gate__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--color-forest);
+    color: var(--color-gold-light);
+    margin-bottom: 1.25rem;
+  }
+
+  .gate__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin: 1.75rem 0 1.25rem;
+  }
+
+  .gate__form input {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    padding: 0.85em 1em;
+    border: 1.5px solid var(--color-line);
+    border-radius: 999px;
+    text-align: center;
+    background: var(--color-cream);
+  }
+
+  .gate__form input:focus {
+    outline: none;
+    border-color: var(--color-emerald);
+  }
+
+  .gate__help {
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .gate__help a {
+    color: var(--color-forest);
+  }
+
+  .gate__resources {
+    width: 100%;
+  }
+
+  .gate__links {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  .gate__link {
+    display: block;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: var(--color-ink);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .gate__link:hover {
+    transform: translateY(-4px);
+  }
+
+  .gate__link span {
+    color: var(--color-forest);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 700px) {
+    .gate__links {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('gate-form') as HTMLFormElement | null;
+  const resources = document.getElementById('gate-resources');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Cosmetic only — see note in frontmatter. Any non-empty submission reveals the links.
+    resources?.removeAttribute('hidden');
+    resources?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

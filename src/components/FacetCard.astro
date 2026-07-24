@@ -1,0 +1,103 @@
+---
+import PlaceholderImage from './PlaceholderImage.astro';
+import type { Facet } from '../data/site';
+
+interface Props {
+  facet: Facet;
+  index: number;
+}
+const { facet, index } = Astro.props;
+const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
+---
+
+<a class="facet-card" href={facet.href}>
+  <div class="facet-card__media">
+    <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
+  </div>
+  <div class="facet-card__body">
+    <span class="facet-card__index">{String(index + 1).padStart(2, '0')}</span>
+    <h3>{facet.name}</h3>
+    <p>{facet.summary}</p>
+    <span class="facet-card__cta">
+      Learn More
+      <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+        <path d="M11 1L15 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M15 5H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+  </div>
+</a>
+
+<style>
+  .facet-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 0.85rem;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+    height: 100%;
+  }
+
+  .facet-card:hover,
+  .facet-card:focus-visible {
+    transform: translateY(-8px) scale(1.012);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .facet-card:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  .facet-card__media {
+    transition: transform 0.6s var(--ease-out);
+    overflow: hidden;
+    border-radius: calc(var(--radius-lg) - 0.35rem);
+  }
+
+  .facet-card:hover .facet-card__media {
+    transform: scale(1.015);
+  }
+
+  .facet-card__body {
+    padding: 1.5rem 0.85rem 0.75rem;
+    position: relative;
+  }
+
+  .facet-card__index {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--color-gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .facet-card__body h3 {
+    margin: 0.35rem 0 0.6rem;
+  }
+
+  .facet-card__body p {
+    font-size: 0.95rem;
+    color: var(--color-body);
+    margin-bottom: 1rem;
+  }
+
+  .facet-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--color-forest);
+    transition: gap 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+
+  .facet-card:hover .facet-card__cta {
+    gap: 0.8em;
+    color: var(--color-emerald);
+  }
+</style>
