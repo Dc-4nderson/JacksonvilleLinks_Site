@@ -22,6 +22,22 @@ export const SITE = {
   president: 'Marti Forchion Chapman',
 };
 
+// Full text of the president's welcome letter — the single source of truth
+// used everywhere the message appears (homepage and the dedicated page).
+// Edit here only; do not paraphrase or truncate on individual pages.
+export const PRESIDENT_LETTER = {
+  salutation: 'Dear Visitors,',
+  paragraphs: [
+    'Welcome to the official website of the Jacksonville (FL) Chapter of The Links, Incorporated. I am delighted to extend my warmest greetings and heartfelt appreciation for your interest in our chapter and the impactful work we do.',
+    'It is truly an honor and a privilege to serve as President of this dynamic and dedicated group of professional women. Since our official installation in 1966, the Jacksonville (FL) Chapter has upheld a proud legacy of service and sisterhood. Guided by the core values of friendship and service, we continue to develop programs and partnerships that uplift, inspire, and transform the communities we serve.',
+    'As a part of The Links, Incorporated—one of the nation’s oldest and largest volunteer service organizations, comprising over 17,000 accomplished women in 299 chapters across 41 states, the District of Columbia, the Commonwealth of the Bahamas, and the United Kingdom—we are proud to implement impactful initiatives in five key facets: Services to Youth, The Arts, National Trends and Services, International Trends and Services, and Health and Human Services.',
+    'In alignment with our national mission, the Jacksonville (FL) Chapter is committed to delivering transformative programming that promotes educational excellence, cultural awareness, health equity, civic engagement, and global understanding. Whether we are mentoring future leaders, supporting local artists, addressing community health disparities, or fostering international goodwill, we do so with integrity, purpose, and an unwavering commitment to excellence.',
+    'I invite you to explore our website to learn more about our work, our impact, and our vision for the future. We welcome opportunities for community collaboration and encourage you to join us as we continue to make a meaningful difference—together.',
+    'Thank you again for visiting. Your support and engagement are vital to our continued success.',
+  ],
+  closing: 'In Friendship and Service,',
+};
+
 export type NavChild = { label: string; href: string };
 export type NavItem = { label: string; href: string; children?: NavChild[] };
 

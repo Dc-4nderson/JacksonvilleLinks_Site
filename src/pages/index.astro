@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import FacetCard from '../components/FacetCard.astro';
-import { SITE, FACETS } from '../data/site';
+import { SITE, FACETS, PRESIDENT_LETTER } from '../data/site';
 import presidentPortrait from '../assets/images/president/portrait.jpg';
 ---
 
@@ -14,29 +14,32 @@ import presidentPortrait from '../assets/images/president/portrait.jpg';
 >
   <HeroCarousel />
 
-  <section class="stats section--tight">
-    <div class="container stats__grid" data-reveal-group>
-      <div class="stats__item">
-        <span class="stats__num">{new Date().getFullYear() - SITE.founded}+</span>
-        <span class="stats__label">Years of Service</span>
+  <section class="section president">
+    <div class="container president__grid">
+      <div class="president__media" data-reveal>
+        <Image
+          src={presidentPortrait}
+          alt={`Portrait of ${SITE.president}, President of the Jacksonville (FL) Chapter of The Links, Incorporated`}
+          width={420}
+          height={560}
+          class="president__portrait"
+        />
+        <p class="president__caption">
+          <strong>{SITE.president}</strong><br />
+          President, {SITE.name}
+        </p>
       </div>
-      <div class="stats__item">
-        <span class="stats__num">5</span>
-        <span class="stats__label">Program Facets</span>
-      </div>
-      {/*
-        TODO(client): these two figures are unconfirmed — do not replace
-        with a guessed number. Swap in the real total once the chapter
-        sends it, then restyle back to a normal .stats__item like the two
-        above (drop stats__item--pending and stats__num--pending).
-      */}
-      <div class="stats__item stats__item--pending">
-        <span class="stats__num stats__num--pending">[CONFIRM: dollars donated]</span>
-        <span class="stats__label">Donated to Local Organizations</span>
-      </div>
-      <div class="stats__item stats__item--pending">
-        <span class="stats__num stats__num--pending">[CONFIRM: member count]</span>
-        <span class="stats__label">Active Chapter Members</span>
+      <div class="president__copy" data-reveal>
+        <p class="eyebrow">A Message From Our President</p>
+        <p class="president__dropcap-para">
+          <span class="president__dropcap" aria-hidden="true">{PRESIDENT_LETTER.salutation[0]}</span>{PRESIDENT_LETTER.salutation.slice(1)}
+        </p>
+        {PRESIDENT_LETTER.paragraphs.map((p) => <p>{p}</p>)}
+        <p class="president__motto">{PRESIDENT_LETTER.closing}</p>
+        <p class="president__sign">
+          <strong>{SITE.president}</strong><br />
+          President, {SITE.name}
+        </p>
       </div>
     </div>
   </section>
@@ -54,35 +57,6 @@ import presidentPortrait from '../assets/images/president/portrait.jpg';
       </div>
       <div class="facets__grid" data-reveal-group>
         {FACETS.map((facet, i) => <FacetCard facet={facet} index={i} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section president">
-    <div class="container president__grid">
-      <div class="president__media" data-reveal>
-        <Image
-          src={presidentPortrait}
-          alt={`Portrait of ${SITE.president}, President of the Jacksonville (FL) Chapter of The Links, Incorporated`}
-          width={420}
-          height={560}
-          class="president__portrait"
-        />
-      </div>
-      <div class="president__copy" data-reveal>
-        <p class="eyebrow">A Message From Our President</p>
-        <blockquote class="president__quote">
-          <span class="president__dropcap" aria-hidden="true">I</span>t is truly an honor and a privilege to
-          serve as President of this dynamic and dedicated group of professional women.
-          Guided by the core values of friendship and service, we work within five key
-          program areas to build a better Jacksonville — together.
-        </blockquote>
-        <p class="president__sign">
-          <strong>{SITE.president}</strong><br />
-          President, {SITE.name}
-        </p>
-        <p class="president__motto">&ldquo;{SITE.motto}&rdquo;</p>
-        <a href="/our-chapter/president/" class="btn btn--outline">Read the Full Welcome</a>
       </div>
     </div>
   </section>
@@ -106,72 +80,9 @@ import presidentPortrait from '../assets/images/president/portrait.jpg';
 </Layout>
 
 <style>
-  .stats {
+  .facets {
     background: var(--color-white);
     border-bottom: 1px solid var(--color-line);
-  }
-
-  .stats__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    text-align: center;
-  }
-
-  .stats__item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .stats__num {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    font-weight: 600;
-    color: var(--color-forest);
-  }
-
-  .stats__label {
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-body);
-    opacity: 0.75;
-  }
-
-  /* Visually distinct from confirmed stats until real figures arrive */
-  .stats__item--pending {
-    position: relative;
-    padding-top: 1.5rem;
-  }
-
-  .stats__item--pending::before {
-    content: 'Pending Confirmation';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-forest-deep);
-    background: var(--color-gold-light);
-    padding: 0.25em 0.65em;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-
-  .stats__num--pending {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 600;
-    font-style: italic;
-    color: var(--color-body);
-    opacity: 0.6;
-    border: 1.5px dashed var(--color-line);
-    border-radius: var(--radius-sm);
-    padding: 0.6em 0.5em;
   }
 
   .facets__intro {
@@ -192,11 +103,11 @@ import presidentPortrait from '../assets/images/president/portrait.jpg';
   .president__grid {
     display: grid;
     gap: 2.5rem;
-    align-items: center;
+    align-items: start;
   }
 
   .president__media {
-    max-width: 420px;
+    max-width: 340px;
     margin-inline: auto;
   }
 
@@ -209,35 +120,40 @@ import presidentPortrait from '../assets/images/president/portrait.jpg';
     box-shadow: var(--shadow-card);
   }
 
-  .president__quote {
-    margin: 0 0 1.5rem;
+  .president__caption {
+    margin-top: 1rem;
+    font-size: 0.92rem;
+    text-align: center;
+  }
+
+  .president__copy {
+    max-width: 66ch;
+  }
+
+  .president__dropcap-para {
     font-family: var(--font-display);
-    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
-    line-height: 1.45;
-    color: var(--color-ink);
-    font-weight: 500;
-    max-width: 46ch;
+    font-size: 1.15rem;
   }
 
   .president__dropcap {
     float: left;
+    font-family: var(--font-display);
     font-size: 3.4rem;
     line-height: 0.8;
-    padding-right: 0.12em;
-    padding-top: 0.08em;
+    padding: 0.06em 0.12em 0 0;
     color: var(--color-gold);
     font-weight: 600;
   }
 
   .president__sign {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .president__motto {
     font-family: var(--font-display);
     font-style: italic;
     color: var(--color-emerald);
-    margin-bottom: 1.75rem;
+    margin-bottom: 0.25rem;
   }
 
   .cta-band {
@@ -264,12 +180,6 @@ import presidentPortrait from '../assets/images/president/portrait.jpg';
     flex-shrink: 0;
   }
 
-  @media (min-width: 640px) {
-    .stats__grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
   @media (min-width: 800px) {
     .facets__grid {
       grid-template-columns: repeat(2, 1fr);
@@ -278,7 +188,7 @@ import presidentPortrait from '../assets/images/president/portrait.jpg';
 
   @media (min-width: 900px) {
     .president__grid {
-      grid-template-columns: 0.85fr 1.15fr;
+      grid-template-columns: 0.75fr 1.25fr;
     }
   }
 
