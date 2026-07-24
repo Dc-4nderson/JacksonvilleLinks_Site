@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-import PlaceholderImage from './PlaceholderImage.astro';
 import type { Facet } from '../data/site';
 
 interface Props {
@@ -8,23 +6,9 @@ interface Props {
   index: number;
 }
 const { facet, index } = Astro.props;
-const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
 ---
 
 <a class="facet-card" href={facet.href}>
-  <div class="facet-card__media">
-    {facet.image ? (
-      <Image
-        src={facet.image}
-        alt={facet.imageAlt ?? `${facet.name} program photo`}
-        width={480}
-        height={360}
-        class="facet-card__img"
-      />
-    ) : (
-      <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
-    )}
-  </div>
   <div class="facet-card__body">
     <span class="facet-card__index">{String(index + 1).padStart(2, '0')}</span>
     <h3>{facet.name}</h3>
@@ -64,26 +48,8 @@ const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
     outline-offset: 3px;
   }
 
-  .facet-card__media {
-    transition: transform 0.6s var(--ease-out);
-    overflow: hidden;
-    border-radius: calc(var(--radius-lg) - 0.35rem);
-  }
-
-  .facet-card__img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4/3;
-    object-fit: cover;
-    display: block;
-  }
-
-  .facet-card:hover .facet-card__media {
-    transform: scale(1.015);
-  }
-
   .facet-card__body {
-    padding: 1.5rem 0.85rem 0.75rem;
+    padding: 1.85rem 0.85rem 0.75rem;
     position: relative;
   }
 

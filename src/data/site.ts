@@ -8,6 +8,8 @@ import internationalTrendsHaiti from '../assets/images/facets/international-tren
 import internationalTrendsNigeria from '../assets/images/facets/international-trends-services/gems-speaker-nigeria.jpg';
 import internationalTrendsBahamas from '../assets/images/facets/international-trends-services/gems-speaker-bahamas.jpg';
 import internationalTrendsCarePackages from '../assets/images/facets/international-trends-services/haiti-care-packages.jpg';
+import nobleFlyer from '../assets/images/facets/national-trends/noble-law-and-your-community-flyer.jpg';
+import chapterMeeting from '../assets/images/hero/chapter-meeting.jpg';
 
 export const SITE = {
   name: 'The Jacksonville (FL) Chapter of The Links, Incorporated',
@@ -90,6 +92,21 @@ export type Facet = {
   image?: ImageMetadata;
   imageAlt?: string;
   gallery?: { src: ImageMetadata; alt: string }[];
+  largeGallery?: boolean;
+  resources?: Resource[];
+};
+
+// A resource is an external program/organization referenced on a facet
+// page — not a claim of formal partnership. `flyer` shows an image as-is
+// (no CTA, e.g. a one-off event flyer); `ctaHref` links out to something
+// like a PDF (no flyer image shown alongside it).
+export type Resource = {
+  name: string;
+  description?: string;
+  contact?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  flyer?: { src: ImageMetadata; alt: string };
 };
 
 export const FACETS: Facet[] = [
@@ -121,13 +138,22 @@ export const FACETS: Facet[] = [
       'Our chapter has a long history of hands-on programming, from Project LEAD: High Expectations and the Little Sisters of Links mentoring program, to literacy initiatives like Great Girls + Great Books = Great Readers, to cultural enrichment through Ritz Museum tours and Nutcracker Ballet sponsorships.',
       'Recent goals include a partnership with the Links-NSBE Jr. Club, monthly mentoring, STEAM career development, college readiness programming, financial literacy instruction, HBCU promotion, and college scholarship awards.',
     ],
+    resources: [
+      {
+        name: 'Literacy Alliance of Northeast Florida',
+        description: 'Free adult education for learners 16 and up — reading and math classes, one-on-one tutoring, and preparation for a high school equivalency diploma. Classes meet at the duPont Center or online.',
+        contact: '40 East Adams Street, Jacksonville, FL · (904) 238-9000',
+        ctaLabel: 'View Flyer (PDF)',
+        ctaHref: '/documents/literacy-alliance-flyer.pdf',
+      },
+    ],
   },
   {
     slug: 'the-arts',
     name: 'The Arts',
     href: '/programs/the-arts/',
     summary: 'Enriching the quality of life of our youth and communities through educational and engaging art experiences.',
-    mission: 'Rooted in co-founder Margaret Roselle Hawkins’ artistic legacy and established in 1964, The Arts facet is dedicated to Linking Art Through Transformative Programming.',
+    mission: 'Linking Art Through Transformative Programming.',
     highlights: [
       'Classics Through The Ages',
       'National Poster Art Contest',
@@ -135,9 +161,10 @@ export const FACETS: Facet[] = [
       'Artist Noir',
     ],
     paragraphs: [
-      'The Arts facet is rooted in co-founder Margaret Roselle Hawkins’ artistic legacy. Her talent, discovered at a young age, earned her a four-year scholarship to the Women’s School of Design — later the Moore Institute of Art — and led to her work as an art teacher. That passion for creative expression helped establish The Arts as a national facet in 1964 at the 14th National Assembly.',
-      'Classics Through The Ages increases African-American youth engagement with classical arts, giving talented students the chance to develop their skills and pursue educational and career pathways. The National Poster Art Contest features health-themed artwork promoting healthy, energetic, active lifestyles.',
-      'Taking STEM into STEAM integrates art into STEM education, including symphonic partnerships and quilting collaborations, while Artist Noir expands into literary, theater, and visual arts — from watercolors and fashion design to sculpture, drama, spoken word, and dance.',
+      'The Links, Incorporated’s support of the arts can be traced to our cultured co-founder Margaret Roselle Hawkins. Her innate artistic talent, discovered at a young age, earned her a four-year scholarship to the Women’s School of Design, later known as the Moore Institute of Art. Her passion for creative expression later led to her appointment as an art teacher, and helped give root to the establishment of The Arts facet in 1964 at the 14th National Assembly.',
+      'The goal of The Arts facet is to produce and support programs to enrich the quality of life of our youth and communities through educational and engaging art experiences — Transforming Communities and Fulfilling Our Purpose.',
+      'National Signature Arts Program Summary: Classics Through The Ages focuses on increasing the interest, knowledge, and participation of African-American youth in the classical arts, affording exemplary student artists opportunities to hone their skills and earn recognition and support for their educational and career pursuits. The National Poster Art Contest includes health-related themes, seeking to depict healthy, energetic, active lifestyles.',
+      'Taking STEM into STEAM brings art into the educational mix — helping students learn that there are multiple ways to reach a conclusion, garner greater flexibility in how they learn, and gain deeper understanding for problem solving. Past projects have included partnerships with symphonies and Connecting Threads through quilt making. Artist Noir, modeled after Classics Through The Ages, includes literary, theater, and visual arts, encouraging multi-arts disciplines such as watercolors, fashion design, sculpture, drama, spoken word, and dance.',
     ],
   },
   {
@@ -154,6 +181,13 @@ export const FACETS: Facet[] = [
       'National Trends and Services designs community programs that increase awareness of issues affecting the quality of life for African Americans, addressing economic and social inequalities in education, income, health, and employment.',
       'Vision: eliminate disparities by reducing barriers to services through advocacy, education, and service. Mission: empower our chapters to effectively uplift the communities in which we work. Goals: increase the number of sustainable and measurable programs, deepen collaborative partnerships, and extend our initiatives into the communities with the greatest need.',
       'In 2016, the Jacksonville Chapter encouraged the community to take an active role in the presidential election process by sponsoring voter registration drives at Florida’s first HBCU, Edward Waters College. Facet Chair LaVonne Mitchell led the campaign at the Schell-Sweet Center on campus, registering new voters alongside fellow chapter members. The facet also partners with Operation New Hope on the Adopt A Child Project, providing holiday gifts and celebrations for underprivileged children.',
+    ],
+    resources: [
+      {
+        name: 'The Law and Your Community®',
+        description: 'A NOBLE (National Organization of Black Law Enforcement Executives) training held at Edward Waters University in February 2024, helping youth and their parents/guardians learn how to interact with local law enforcement. Chapter contact: Dr. Keshan Hargrove.',
+        flyer: { src: nobleFlyer, alt: 'The Law and Your Community flyer — a NOBLE training on interacting with law enforcement, held February 3, 2024 at Edward Waters University' },
+      },
     ],
   },
   {
@@ -198,8 +232,10 @@ export const FACETS: Facet[] = [
     ],
     image: healthHumanServicesImage,
     imageAlt: 'Jacksonville Links members holding a chapter banner at the Schell-Sweet Community Resource Centre',
+    largeGallery: true,
     gallery: [
       { src: healthHumanServicesRibbonCutting, alt: 'Jacksonville Links members and community partners at a ribbon-cutting ceremony' },
+      { src: chapterMeeting, alt: 'Jacksonville Links members at a chapter meeting' },
     ],
   },
 ];

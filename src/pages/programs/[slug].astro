@@ -30,8 +30,8 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
           <Image
             src={facet.image}
             alt={facet.imageAlt ?? `${facet.name} program photo`}
-            width={640}
-            height={480}
+            width={facet.largeGallery ? 900 : 640}
+            height={facet.largeGallery ? 675 : 480}
             class="facet-detail__img"
           />
         ) : (
@@ -60,9 +60,43 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
     </div>
 
     {facet.gallery && facet.gallery.length > 0 && (
-      <div class="container facet-detail__gallery" data-reveal-group>
+      <div class:list={['container facet-detail__gallery', { 'facet-detail__gallery--large': facet.largeGallery }]} data-reveal-group>
         {facet.gallery.map((g) => (
-          <Image src={g.src} alt={g.alt} width={400} height={300} class="facet-detail__gallery-img" />
+          <Image
+            src={g.src}
+            alt={g.alt}
+            width={facet.largeGallery ? 700 : 400}
+            height={facet.largeGallery ? 525 : 300}
+            class="facet-detail__gallery-img"
+          />
+        ))}
+      </div>
+    )}
+
+    {facet.resources && facet.resources.length > 0 && (
+      <div class="container facet-detail__resources" data-reveal>
+        <p class="eyebrow">Local Resource</p>
+        {facet.resources.map((resource) => (
+          <div class="resource-card">
+            {resource.flyer && (
+              <Image
+                src={resource.flyer.src}
+                alt={resource.flyer.alt}
+                width={480}
+                class="resource-card__flyer"
+              />
+            )}
+            <div class="resource-card__body">
+              <h3>{resource.name}</h3>
+              {resource.description && <p>{resource.description}</p>}
+              {resource.contact && <p class="resource-card__contact">{resource.contact}</p>}
+              {resource.ctaHref && (
+                <a href={resource.ctaHref} class="btn btn--outline btn--sm" target="_blank" rel="noopener noreferrer">
+                  {resource.ctaLabel}
+                </a>
+              )}
+            </div>
+          </div>
         ))}
       </div>
     )}
@@ -119,9 +153,69 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
     box-shadow: var(--shadow-card);
   }
 
+  .facet-detail__gallery--large {
+    max-width: 1000px;
+  }
+
+  .facet-detail__resources {
+    margin-top: 2.5rem;
+  }
+
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--color-cream-dim);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    max-width: 640px;
+  }
+
+  .resource-card__flyer {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    margin-inline: auto;
+  }
+
+  .resource-card__body h3 {
+    margin-bottom: 0.6rem;
+  }
+
+  .resource-card__body p {
+    font-size: 0.95rem;
+  }
+
+  .resource-card__contact {
+    font-size: 0.85rem;
+    color: var(--color-emerald);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (min-width: 560px) {
+    .resource-card:has(.resource-card__flyer) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .resource-card__flyer {
+      max-width: 200px;
+      flex-shrink: 0;
+      margin-inline: 0;
+    }
+  }
+
   @media (min-width: 700px) {
     .facet-detail__gallery {
       grid-template-columns: repeat(4, 1fr);
+    }
+
+    .facet-detail__gallery--large {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
