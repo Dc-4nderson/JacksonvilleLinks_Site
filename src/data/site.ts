@@ -9,6 +9,7 @@ import internationalTrendsNigeria from '../assets/images/facets/international-tr
 import internationalTrendsBahamas from '../assets/images/facets/international-trends-services/gems-speaker-bahamas.jpg';
 import internationalTrendsCarePackages from '../assets/images/facets/international-trends-services/haiti-care-packages.jpg';
 import nobleFlyer from '../assets/images/facets/national-trends/noble-law-and-your-community-flyer.jpg';
+import chapterMeeting from '../assets/images/hero/chapter-meeting.jpg';
 
 export const SITE = {
   name: 'The Jacksonville (FL) Chapter of The Links, Incorporated',
@@ -91,6 +92,7 @@ export type Facet = {
   image?: ImageMetadata;
   imageAlt?: string;
   gallery?: { src: ImageMetadata; alt: string }[];
+  largeGallery?: boolean;
   resources?: Resource[];
 };
 
@@ -230,8 +232,10 @@ export const FACETS: Facet[] = [
     ],
     image: healthHumanServicesImage,
     imageAlt: 'Jacksonville Links members holding a chapter banner at the Schell-Sweet Community Resource Centre',
+    largeGallery: true,
     gallery: [
       { src: healthHumanServicesRibbonCutting, alt: 'Jacksonville Links members and community partners at a ribbon-cutting ceremony' },
+      { src: chapterMeeting, alt: 'Jacksonville Links members at a chapter meeting' },
     ],
   },
 ];
