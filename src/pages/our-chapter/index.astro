@@ -49,6 +49,19 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
     </div>
   </section>
 
+  <section class="section section--tight national-context">
+    <div class="container">
+      <p class="eyebrow">Part of a National Sisterhood</p>
+      <p class="lede">
+        The Links, Incorporated was founded in 1946 by Margaret Hawkins and Sarah Scott of
+        Philadelphia, PA, and has grown into one of the nation's oldest and largest volunteer
+        service organizations. The Links Foundation, Incorporated — established in 1979 to
+        expand the organization's philanthropic work — has contributed more than $25 million
+        to charitable causes nationally.
+      </p>
+    </div>
+  </section>
+
   <section class="section section--tight links-grid-section">
     <div class="container">
       <div class="links-grid" data-reveal-group>
@@ -80,6 +93,15 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
     object-fit: cover;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
+  }
+
+  .national-context {
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .national-context .lede {
+    max-width: 72ch;
   }
 
   .links-grid-section {

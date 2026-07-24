@@ -27,6 +27,8 @@ const cardImages = {
 } as const;
 
 const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
+const electedOfficers = OFFICERS.filter((o) => o.group === 'elected');
+const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
 ---
 
 <Layout
@@ -38,8 +40,9 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 
   <section class="section">
     <div class="container">
-      <ul class="officer-grid" data-reveal-group>
-        {OFFICERS.map((officer) => (
+      <p class="eyebrow" data-reveal>2025–2026 Elected Officers</p>
+      <ul class="officer-grid officer-grid--elected" data-reveal-group>
+        {electedOfficers.map((officer) => (
           <li class="officer-card">
             {'card' in officer && officer.card ? (
               <Image
@@ -65,11 +68,30 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
           </li>
         ))}
       </ul>
+
+      <p class="eyebrow officer-section-spacer" data-reveal>2025–2026 Appointed Officers</p>
+      <ul class="officer-grid" data-reveal-group>
+        {appointedOfficers.map((officer) => (
+          <li class="officer-card">
+            <Image
+              src={cardImages[officer.card]}
+              alt={`${officer.name}, ${officer.title} of the Jacksonville (FL) Chapter of The Links, Incorporated`}
+              width={440}
+              height={440}
+              class="officer-card__graphic"
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </Layout>
 
 <style>
+  .officer-section-spacer {
+    margin-top: 3.5rem;
+  }
+
   .officer-grid {
     list-style: none;
     margin: 0;
