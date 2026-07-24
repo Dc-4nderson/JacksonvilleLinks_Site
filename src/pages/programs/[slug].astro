@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
@@ -25,7 +26,17 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
   <section class="section">
     <div class="container facet-detail">
       <div class="facet-detail__media" data-reveal>
-        <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
+        {facet.image ? (
+          <Image
+            src={facet.image}
+            alt={facet.imageAlt ?? `${facet.name} program photo`}
+            width={640}
+            height={480}
+            class="facet-detail__img"
+          />
+        ) : (
+          <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
+        )}
         {facet.quote && (
           <blockquote class="facet-detail__quote">
             <p>&ldquo;{facet.quote.text}&rdquo;</p>
@@ -47,6 +58,14 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
         )}
       </div>
     </div>
+
+    {facet.gallery && facet.gallery.length > 0 && (
+      <div class="container facet-detail__gallery" data-reveal-group>
+        {facet.gallery.map((g) => (
+          <Image src={g.src} alt={g.alt} width={400} height={300} class="facet-detail__gallery-img" />
+        ))}
+      </div>
+    )}
   </section>
 
   <section class="section section--tight other-facets">
@@ -73,6 +92,37 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
     display: grid;
     gap: 2.5rem;
     align-items: start;
+  }
+
+  .facet-detail__img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .facet-detail__gallery {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .facet-detail__gallery-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+  }
+
+  @media (min-width: 700px) {
+    .facet-detail__gallery {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   .facet-detail__quote {

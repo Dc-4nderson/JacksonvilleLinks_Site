@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import PlaceholderImage from './PlaceholderImage.astro';
 import type { Facet } from '../data/site';
 
@@ -12,7 +13,17 @@ const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
 
 <a class="facet-card" href={facet.href}>
   <div class="facet-card__media">
-    <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
+    {facet.image ? (
+      <Image
+        src={facet.image}
+        alt={facet.imageAlt ?? `${facet.name} program photo`}
+        width={480}
+        height={360}
+        class="facet-card__img"
+      />
+    ) : (
+      <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
+    )}
   </div>
   <div class="facet-card__body">
     <span class="facet-card__index">{String(index + 1).padStart(2, '0')}</span>
@@ -57,6 +68,14 @@ const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
     transition: transform 0.6s var(--ease-out);
     overflow: hidden;
     border-radius: calc(var(--radius-lg) - 0.35rem);
+  }
+
+  .facet-card__img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
   }
 
   .facet-card:hover .facet-card__media {

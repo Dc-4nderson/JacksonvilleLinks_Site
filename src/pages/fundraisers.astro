@@ -4,20 +4,21 @@ import PageHero from '../components/PageHero.astro';
 import PlaceholderImage from '../components/PlaceholderImage.astro';
 import { SITE } from '../data/site';
 
-// Placeholder events only — the current chapter site does not list active
-// fundraiser details. Replace with real event data once the chapter
-// confirms dates, venues, and ticketing links.
+// The Western Gala is a real, named chapter fundraiser (per the current
+// live site), but its date/venue/details aren't published anywhere we
+// could pull from — those still need to come from the chapter. The
+// second entry is a generic sample layout, not a real event name.
 const events = [
   {
-    isPlaceholder: true,
-    title: 'Sample Event: Scholarship Gala',
+    flag: 'Real Event — Details Needed',
+    title: 'Western Gala',
     date: 'Date to be announced',
     location: 'Location to be announced',
-    summary: 'A formal evening supporting the chapter’s scholarship and youth programming funds. Replace with the chapter’s actual event details.',
+    summary: 'The Jacksonville Chapter’s signature fundraising gala, supporting programming across all five facets. Details (date, venue, tickets) to be confirmed by the chapter.',
     variant: 1 as const,
   },
   {
-    isPlaceholder: true,
+    flag: 'Sample Placeholder Event',
     title: 'Sample Event: Links Golf Classic',
     date: 'Date to be announced',
     location: 'Location to be announced',
@@ -40,9 +41,10 @@ const events = [
   <section class="section">
     <div class="container">
       <div class="events-notice" data-reveal>
-        <strong>Placeholder content:</strong> the events below are sample layouts only. Real
-        fundraiser details (dates, venues, ticket links) are needed from the chapter before
-        launch.
+        <strong>Content note:</strong> the Western Gala is a real, named chapter fundraiser,
+        but we don't have a confirmed date, venue, or ticket link for it yet. The Golf Classic
+        below is a sample layout only, not a real event name. Both need real details from the
+        chapter before launch.
       </div>
 
       <div class="events-grid" data-reveal-group>
@@ -50,7 +52,7 @@ const events = [
           <article class="event-card">
             <div class="event-card__media">
               <PlaceholderImage label={`${event.title} photo`} ratio="16/9" rounded="lg" variant={event.variant} />
-              {event.isPlaceholder && <span class="event-card__flag">Sample Placeholder Event</span>}
+              <span class="event-card__flag">{event.flag}</span>
             </div>
             <div class="event-card__body">
               <p class="event-card__date">{event.date}</p>
@@ -112,7 +114,7 @@ const events = [
 
   .event-card__flag {
     position: absolute;
-    bottom: 0.75rem;
+    top: 0.75rem;
     left: 0.75rem;
     background: rgba(18, 44, 34, 0.85);
     color: var(--color-cream);
@@ -122,6 +124,7 @@ const events = [
     text-transform: uppercase;
     padding: 0.4em 0.75em;
     border-radius: 999px;
+    max-width: calc(100% - 5.5rem);
   }
 
   .event-card__body {

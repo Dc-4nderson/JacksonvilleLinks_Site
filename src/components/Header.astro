@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { NAV, SITE } from '../data/site';
+import chapterLogo from '../assets/images/brand/chapter-logo.png';
 
 interface Props {
   transparent?: boolean;
@@ -17,11 +19,10 @@ function isActive(href: string) {
 <header class="site-header" data-transparent={transparent ? 'true' : 'false'} id="site-header">
   <div class="site-header__bar container">
     <a href="/" class="site-header__brand" aria-label={`${SITE.shortName} — home`}>
-      <span class="site-header__mark" aria-hidden="true">JL</span>
-      <span class="site-header__wordmark">
-        <span class="site-header__wordmark-top">Jacksonville</span>
-        <span class="site-header__wordmark-bottom">The Links, Incorporated</span>
+      <span class="site-header__logo-badge">
+        <Image src={chapterLogo} alt="" width={220} height={116} class="site-header__logo" />
       </span>
+      <span class="visually-hidden">{SITE.name}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary">
@@ -128,49 +129,32 @@ function isActive(href: string) {
   .site-header__brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
     text-decoration: none;
-    color: var(--color-ink);
-    transition: color 0.4s var(--ease-out);
   }
 
-  .site-header[data-transparent='true']:not(.is-scrolled) .site-header__brand {
-    color: var(--color-white);
-  }
-
-  .site-header__mark {
+  .site-header__logo-badge {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: var(--color-forest);
-    color: var(--color-gold-light);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1rem;
-    letter-spacing: 0.02em;
-    flex-shrink: 0;
+    background: var(--color-white);
+    border-radius: var(--radius-sm);
+    padding: 0.4rem 0.65rem;
+    box-shadow: 0 2px 10px -4px rgba(0, 0, 0, 0.18);
+    transition: padding 0.4s var(--ease-out);
   }
 
-  .site-header__wordmark {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
+  .site-header.is-scrolled .site-header__logo-badge {
+    padding: 0.3rem 0.5rem;
   }
 
-  .site-header__wordmark-top {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.05rem;
+  .site-header__logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    transition: height 0.4s var(--ease-out);
   }
 
-  .site-header__wordmark-bottom {
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    opacity: 0.75;
+  .site-header.is-scrolled .site-header__logo {
+    height: 32px;
   }
 
   .site-nav__list {

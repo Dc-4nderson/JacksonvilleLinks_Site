@@ -1,5 +1,13 @@
 // Central site content. A non-technical admin editing copy should only ever
 // need to touch this file (and the individual page .astro files for prose).
+import type { ImageMetadata } from 'astro';
+import healthHumanServicesImage from '../assets/images/facets/health-and-human-services/schell-sweet-banner.jpg';
+import healthHumanServicesRibbonCutting from '../assets/images/facets/health-and-human-services/ribbon-cutting.jpg';
+import internationalTrendsImage from '../assets/images/facets/international-trends-services/gems-cuisine-tasting.jpg';
+import internationalTrendsHaiti from '../assets/images/facets/international-trends-services/gems-speaker-haiti.jpg';
+import internationalTrendsNigeria from '../assets/images/facets/international-trends-services/gems-speaker-nigeria.jpg';
+import internationalTrendsBahamas from '../assets/images/facets/international-trends-services/gems-speaker-bahamas.jpg';
+import internationalTrendsCarePackages from '../assets/images/facets/international-trends-services/haiti-care-packages.jpg';
 
 export const SITE = {
   name: 'The Jacksonville (FL) Chapter of The Links, Incorporated',
@@ -12,6 +20,22 @@ export const SITE = {
   address: 'P.O. Box 43482, Jacksonville, FL 32203',
   url: 'https://jacksonvillelinksinc.org',
   president: 'Marti Forchion Chapman',
+};
+
+// Full text of the president's welcome letter — the single source of truth
+// used everywhere the message appears (homepage and the dedicated page).
+// Edit here only; do not paraphrase or truncate on individual pages.
+export const PRESIDENT_LETTER = {
+  salutation: 'Dear Visitors,',
+  paragraphs: [
+    'Welcome to the official website of the Jacksonville (FL) Chapter of The Links, Incorporated. I am delighted to extend my warmest greetings and heartfelt appreciation for your interest in our chapter and the impactful work we do.',
+    'It is truly an honor and a privilege to serve as President of this dynamic and dedicated group of professional women. Since our official installation in 1966, the Jacksonville (FL) Chapter has upheld a proud legacy of service and sisterhood. Guided by the core values of friendship and service, we continue to develop programs and partnerships that uplift, inspire, and transform the communities we serve.',
+    'As a part of The Links, Incorporated—one of the nation’s oldest and largest volunteer service organizations, comprising over 17,000 accomplished women in 299 chapters across 41 states, the District of Columbia, the Commonwealth of the Bahamas, and the United Kingdom—we are proud to implement impactful initiatives in five key facets: Services to Youth, The Arts, National Trends and Services, International Trends and Services, and Health and Human Services.',
+    'In alignment with our national mission, the Jacksonville (FL) Chapter is committed to delivering transformative programming that promotes educational excellence, cultural awareness, health equity, civic engagement, and global understanding. Whether we are mentoring future leaders, supporting local artists, addressing community health disparities, or fostering international goodwill, we do so with integrity, purpose, and an unwavering commitment to excellence.',
+    'I invite you to explore our website to learn more about our work, our impact, and our vision for the future. We welcome opportunities for community collaboration and encourage you to join us as we continue to make a meaningful difference—together.',
+    'Thank you again for visiting. Your support and engagement are vital to our continued success.',
+  ],
+  closing: 'In Friendship and Service,',
 };
 
 export type NavChild = { label: string; href: string };
@@ -63,6 +87,9 @@ export type Facet = {
   mission: string;
   highlights: string[];
   paragraphs: string[];
+  image?: ImageMetadata;
+  imageAlt?: string;
+  gallery?: { src: ImageMetadata; alt: string }[];
 };
 
 export const FACETS: Facet[] = [
@@ -77,6 +104,7 @@ export const FACETS: Facet[] = [
     },
     mission: 'Services to Youth takes an integrated approach to the academic, health, cultural, social awareness, career development, and mentoring needs of the young people in our community.',
     highlights: [
+      'GEMS — Girls Empowered and Motivated to Succeed',
       'Project LEAD: High Expectations',
       'Little Sisters of Links mentoring program',
       'Great Girls + Great Books = Great Readers Program',
@@ -89,7 +117,7 @@ export const FACETS: Facet[] = [
       'STEAM activities for School of Success Middle Academy',
     ],
     paragraphs: [
-      'The Jacksonville Chapter’s Services to Youth facet is built on an integrated approach that addresses the academic, health, cultural, social awareness, career development, and mentoring needs of the young people we serve.',
+      'Services to Youth was The Links, Incorporated’s first program, established to equip Black youth with the intellectual and achievement-oriented tools to become successful, productive citizens. It remains rooted in an integrated approach that addresses the academic, health, cultural, social awareness, career development, and mentoring needs of the young people we serve — including active, healthy living, since children who stay active see greater school success and self-esteem.',
       'Our chapter has a long history of hands-on programming, from Project LEAD: High Expectations and the Little Sisters of Links mentoring program, to literacy initiatives like Great Girls + Great Books = Great Readers, to cultural enrichment through Ritz Museum tours and Nutcracker Ballet sponsorships.',
       'Recent goals include a partnership with the Links-NSBE Jr. Club, monthly mentoring, STEAM career development, college readiness programming, financial literacy instruction, HBCU promotion, and college scholarship awards.',
     ],
@@ -107,7 +135,7 @@ export const FACETS: Facet[] = [
       'Artist Noir',
     ],
     paragraphs: [
-      'The Arts facet is rooted in co-founder Margaret Roselle Hawkins’ artistic legacy. Established in 1964, the program is dedicated to enriching the quality of life of our youth and communities through educational and engaging art experiences.',
+      'The Arts facet is rooted in co-founder Margaret Roselle Hawkins’ artistic legacy. Her talent, discovered at a young age, earned her a four-year scholarship to the Women’s School of Design — later the Moore Institute of Art — and led to her work as an art teacher. That passion for creative expression helped establish The Arts as a national facet in 1964 at the 14th National Assembly.',
       'Classics Through The Ages increases African-American youth engagement with classical arts, giving talented students the chance to develop their skills and pursue educational and career pathways. The National Poster Art Contest features health-themed artwork promoting healthy, energetic, active lifestyles.',
       'Taking STEM into STEAM integrates art into STEM education, including symphonic partnerships and quilting collaborations, while Artist Noir expands into literary, theater, and visual arts — from watercolors and fashion design to sculpture, drama, spoken word, and dance.',
     ],
@@ -124,8 +152,8 @@ export const FACETS: Facet[] = [
     ],
     paragraphs: [
       'National Trends and Services designs community programs that increase awareness of issues affecting the quality of life for African Americans, addressing economic and social inequalities in education, income, health, and employment.',
-      'The facet envisions eliminating disparities through advocacy, education, and service, empowering chapters to expand sustainable programs, build collaborative partnerships, and extend initiatives into underserved areas.',
-      'The Jacksonville Chapter has coordinated voter registration drives at Edward Waters College and the Schell-Sweet Center, and partners with Operation New Hope on the Adopt A Child Project, providing holiday gifts and celebrations for underprivileged children.',
+      'Vision: eliminate disparities by reducing barriers to services through advocacy, education, and service. Mission: empower our chapters to effectively uplift the communities in which we work. Goals: increase the number of sustainable and measurable programs, deepen collaborative partnerships, and extend our initiatives into the communities with the greatest need.',
+      'In 2016, the Jacksonville Chapter encouraged the community to take an active role in the presidential election process by sponsoring voter registration drives at Florida’s first HBCU, Edward Waters College. Facet Chair LaVonne Mitchell led the campaign at the Schell-Sweet Center on campus, registering new voters alongside fellow chapter members. The facet also partners with Operation New Hope on the Adopt A Child Project, providing holiday gifts and celebrations for underprivileged children.',
     ],
   },
   {
@@ -140,8 +168,16 @@ export const FACETS: Facet[] = [
     ],
     paragraphs: [
       'International Trends & Services works to expand the global platform for programs designed and developed to serve the educational, health, and cultural needs of people of African descent throughout the world.',
-      'A recent program year emphasized Haiti, supporting 34 orphans at the Ecole Yahve Schamma de Petit Place in Cazeau. Members prepared individual care packages for each child and provided bulk donations to the orphanage.',
+      'The 2017–2018 program year emphasized Haiti, supporting 34 orphans at the Ecole Yahve Schamma de Petit Place in Cazeau. In December 2017, members prepared individual care packages for each child and provided bulk donations to the orphanage.',
       'The facet also conducted a workshop exposing our GEMS youth group to international perspectives, with speakers from Nigeria, Haiti, and the Bahamas sharing cultural insight alongside a tasting of international cuisine.',
+    ],
+    image: internationalTrendsImage,
+    imageAlt: 'GEMS youth group members sampling international cuisine at an International Trends & Services workshop',
+    gallery: [
+      { src: internationalTrendsHaiti, alt: 'A guest speaker discussing Haiti with the GEMS youth group in front of international flags' },
+      { src: internationalTrendsNigeria, alt: 'A presentation board on Nigeria shared with the GEMS youth group' },
+      { src: internationalTrendsBahamas, alt: 'A guest speaker addressing the GEMS youth group' },
+      { src: internationalTrendsCarePackages, alt: 'Jacksonville Links members preparing individually labeled care packages for orphans in Cazeau, Haiti' },
     ],
   },
   {
@@ -158,21 +194,29 @@ export const FACETS: Facet[] = [
     paragraphs: [
       'Health and Human Services was established to address the chronic health disparities that persist in our communities and result in the decreased life expectancy of African Americans — with a focus on cardiovascular disease, breast cancer, organ/tissue/blood donation, and childhood obesity.',
       'HeartLinks to Heart Health engages the community to take an aggressive stance against heart disease. Linkages to Life educates the African-American community about the importance of organ, tissue, and bone marrow donation. Walk for Healthy Living promotes daily exercise and nutrition through events like the Heart Walk and Susan G. Komen Walk.',
-      'The Jacksonville Chapter has supported the Schell-Sweet Community Center and Clinic at Edward Waters College, and continues to develop mental health stigma reduction efforts and healthy-choice programming for youth.',
+      'In 2015–2016, the Jacksonville Chapter provided assistance to the Schell-Sweet Community Center and Clinic on the campus of Edward Waters College, and continues to develop mental health stigma reduction efforts and healthy-choice programming for youth.',
+    ],
+    image: healthHumanServicesImage,
+    imageAlt: 'Jacksonville Links members holding a chapter banner at the Schell-Sweet Community Resource Centre',
+    gallery: [
+      { src: healthHumanServicesRibbonCutting, alt: 'Jacksonville Links members and community partners at a ribbon-cutting ceremony' },
     ],
   },
 ];
 
+// `card` officers have a finished graphic (real photo + name/title already
+// baked in by the chapter) — rendered as-is, no extra HTML caption needed.
+// The president uses a plain portrait photo captioned in HTML as usual.
 export const OFFICERS = [
-  { name: 'Marti Forchion Chapman', title: 'President' },
-  { name: 'Lisa Smith', title: 'Vice President' },
-  { name: 'To Be Announced', title: 'Recording Secretary' },
-  { name: 'To Be Announced', title: 'Corresponding Secretary' },
-  { name: 'To Be Announced', title: 'Financial Secretary' },
-  { name: 'To Be Announced', title: 'Treasurer' },
-  { name: 'To Be Announced', title: 'Programming Chair' },
-  { name: 'To Be Announced', title: 'Parliamentarian' },
-  { name: 'To Be Announced', title: 'Chaplain' },
+  { name: 'Marti Forchion Chapman', title: 'President', photo: 'portrait' as const, group: 'elected' as const },
+  { name: 'Lisa Smith', title: 'Vice President', card: 'vice-president' as const, group: 'elected' as const },
+  { name: 'Reba Barkley', title: 'Recording Secretary', card: 'recording-secretary' as const, group: 'appointed' as const },
+  { name: 'Crystal Charles', title: 'Corresponding Secretary', card: 'corresponding-secretary' as const, group: 'appointed' as const },
+  { name: 'Yvonne McClain Gomes', title: 'Financial Secretary', card: 'financial-secretary' as const, group: 'appointed' as const },
+  { name: 'Deidra Williams-Johnson', title: 'Treasurer', card: 'treasurer' as const, group: 'appointed' as const },
+  { name: 'Juanita Fletcher Cone', title: 'Programming Chair', card: 'programming-chair' as const, group: 'appointed' as const },
+  { name: 'Cynthia Nixon', title: 'Parliamentarian', card: 'parliamentarian' as const, group: 'appointed' as const },
+  { name: 'Kim Brooks Hall', title: 'Chaplain', card: 'chaplain' as const, group: 'appointed' as const },
 ];
 
 export const CHAPTER_MEMBERS = [
@@ -228,5 +272,5 @@ export const FIRST_OFFICERS = [
 
 export const EXTERNAL_LINKS = [
   { label: 'The Links, Incorporated (National)', href: 'https://linksinc.org/' },
-  { label: 'South Atlantic Area', href: 'https://salinksinc.org/' },
+  { label: 'Southern Area', href: 'https://salinksinc.org/' },
 ];

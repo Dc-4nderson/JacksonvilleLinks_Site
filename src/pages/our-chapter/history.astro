@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
 import PlaceholderImage from '../../components/PlaceholderImage.astro';
 import { NAV, FIRST_OFFICERS } from '../../data/site';
+import nationalFounders from '../../assets/images/history/national-founders.jpg';
 
 const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 
@@ -12,16 +14,23 @@ const timeline = [
     year: '1946',
     title: 'The Links, Incorporated Founded',
     body: 'The Links, Incorporated is established as an international, not-for-profit corporation dedicated to friendship and service.',
+    image: nationalFounders,
+    imageAlt: 'Margaret Roselle Hawkins and Sarah Strickland Scott, founders of The Links, Incorporated',
   },
   {
     year: '1966',
     title: 'Jacksonville Chapter Chartered',
-    body: 'The Jacksonville Chapter is officially installed on November 12, 1966, as the Southern Area’s 27th chapter, with Elinor Littlejohn serving as chartering president and fourteen fellow founders by her side.',
+    body: 'The Jacksonville Chapter is officially installed on November 12, 1966, as the Southern Area’s 27th chapter, sponsored by the Tallahassee Chapter and installed by National President Dollie Deselle Adams, with Elinor Littlejohn serving as chartering president and organizer alongside fourteen fellow founders.',
   },
   {
     year: '2012–2014',
     title: 'National First Place Award',
-    body: 'The chapter receives the National FIRST PLACE Award for Umbrella Programming for its GEMS initiative, serving sixth-grade girls at Eugene Butler Middle School.',
+    body: 'The chapter receives the National FIRST PLACE Award for Umbrella Programming for GEMS — Girls Empowered and Motivated to Succeed — serving sixth-grade girls at Eugene Butler Middle School.',
+  },
+  {
+    year: '2016',
+    title: '50 Years of Friendship and Service',
+    body: 'The Jacksonville Chapter celebrates its 50th anniversary, marking five decades of friendship and service to the Jacksonville community.',
   },
   {
     year: '2017–2018',
@@ -51,6 +60,11 @@ const timeline = [
           <div class="timeline__content">
             <h3>{item.title}</h3>
             <p>{item.body}</p>
+            {'image' in item && item.image && (
+              <figure class="timeline__figure">
+                <Image src={item.image} alt={item.imageAlt ?? ''} width={200} height={140} class="timeline__figure-img" />
+              </figure>
+            )}
           </div>
         </div>
       ))}
@@ -136,6 +150,19 @@ const timeline = [
 
   .timeline__content h3 {
     margin-bottom: 0.4rem;
+  }
+
+  .timeline__figure {
+    margin: 0.75rem 0 0;
+  }
+
+  .timeline__figure-img {
+    width: 160px;
+    height: auto;
+    aspect-ratio: 10/7;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-card);
   }
 
   .founders {

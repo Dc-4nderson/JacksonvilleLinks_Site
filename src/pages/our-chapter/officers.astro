@@ -1,11 +1,34 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
-import PlaceholderImage from '../../components/PlaceholderImage.astro';
 import { NAV, OFFICERS } from '../../data/site';
 
+import presidentPortrait from '../../assets/images/president/portrait.jpg';
+import vicePresidentCard from '../../assets/images/officers/vice-president.jpg';
+import recordingSecretaryCard from '../../assets/images/officers/recording-secretary.jpg';
+import correspondingSecretaryCard from '../../assets/images/officers/corresponding-secretary.jpg';
+import financialSecretaryCard from '../../assets/images/officers/financial-secretary.jpg';
+import treasurerCard from '../../assets/images/officers/treasurer.jpg';
+import programmingChairCard from '../../assets/images/officers/programming-chair.jpg';
+import parliamentarianCard from '../../assets/images/officers/parliamentarian.jpg';
+import chaplainCard from '../../assets/images/officers/chaplain.jpg';
+
+const cardImages = {
+  'vice-president': vicePresidentCard,
+  'recording-secretary': recordingSecretaryCard,
+  'corresponding-secretary': correspondingSecretaryCard,
+  'financial-secretary': financialSecretaryCard,
+  'treasurer': treasurerCard,
+  'programming-chair': programmingChairCard,
+  'parliamentarian': parliamentarianCard,
+  'chaplain': chaplainCard,
+} as const;
+
 const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
+const electedOfficers = OFFICERS.filter((o) => o.group === 'elected');
+const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
 ---
 
 <Layout
@@ -17,30 +40,58 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 
   <section class="section">
     <div class="container">
-      <ul class="officer-grid" data-reveal-group>
-        {OFFICERS.map((officer, i) => (
+      <p class="eyebrow" data-reveal>2025–2026 Elected Officers</p>
+      <ul class="officer-grid officer-grid--elected" data-reveal-group>
+        {electedOfficers.map((officer) => (
           <li class="officer-card">
-            <PlaceholderImage
-              label={officer.name === 'To Be Announced' ? `${officer.title} headshot` : `Portrait of ${officer.name}`}
-              ratio="1/1"
-              rounded="full"
-              variant={((i % 4) + 1) as 1 | 2 | 3 | 4}
-              class="officer-card__photo"
-            />
-            <h3>{officer.name}</h3>
-            <p>{officer.title}</p>
+            {'card' in officer && officer.card ? (
+              <Image
+                src={cardImages[officer.card]}
+                alt={`${officer.name}, ${officer.title} of the Jacksonville (FL) Chapter of The Links, Incorporated`}
+                width={440}
+                height={440}
+                class="officer-card__graphic"
+              />
+            ) : (
+              <div class="officer-card__frame">
+                <Image
+                  src={presidentPortrait}
+                  alt={`Portrait of ${officer.name}, ${officer.title}`}
+                  width={320}
+                  height={427}
+                  class="officer-card__photo"
+                />
+                <h3>{officer.name}</h3>
+                <p>{officer.title}</p>
+              </div>
+            )}
           </li>
         ))}
       </ul>
-      <p class="officer-note">
-        Officer headshots and remaining board names shown as placeholders pending updated
-        photography and roster confirmation from the chapter.
-      </p>
+
+      <p class="eyebrow officer-section-spacer" data-reveal>2025–2026 Appointed Officers</p>
+      <ul class="officer-grid" data-reveal-group>
+        {appointedOfficers.map((officer) => (
+          <li class="officer-card">
+            <Image
+              src={cardImages[officer.card]}
+              alt={`${officer.name}, ${officer.title} of the Jacksonville (FL) Chapter of The Links, Incorporated`}
+              width={440}
+              height={440}
+              class="officer-card__graphic"
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 </Layout>
 
 <style>
+  .officer-section-spacer {
+    margin-top: 3.5rem;
+  }
+
   .officer-grid {
     list-style: none;
     margin: 0;
@@ -54,10 +105,47 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
     text-align: center;
   }
 
-  .officer-card :global(.officer-card__photo) {
-    max-width: 160px;
+  .officer-card__frame {
+    background: var(--color-emerald);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 0.9rem 1.25rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  .officer-card__photo {
+    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: calc(var(--radius-md) - 0.3rem);
+    margin-bottom: 0.9rem;
+  }
+
+  .officer-card__frame h3 {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .officer-card__frame p {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.88rem;
+  }
+
+  .officer-card__graphic {
+    width: 100%;
+    max-width: 260px;
     margin-inline: auto;
-    margin-bottom: 1rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+  }
+
+  .officer-card__graphic:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
   }
 
   .officer-card h3 {
@@ -72,13 +160,5 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
     font-size: 0.88rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-  }
-
-  .officer-note {
-    margin-top: 3rem;
-    font-size: 0.85rem;
-    color: var(--color-body);
-    opacity: 0.75;
-    max-width: 60ch;
   }
 </style>
