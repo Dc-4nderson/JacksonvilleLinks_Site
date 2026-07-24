@@ -1,18 +1,39 @@
 ---
+import { Image } from 'astro:assets';
 import { SITE } from '../data/site';
 
+import chapterFormalPortrait from '../assets/images/hero/chapter-formal-portrait.jpg';
+import chapterConferenceGroup from '../assets/images/hero/chapter-conference-group.jpg';
+import chapterMeeting from '../assets/images/hero/chapter-meeting.jpg';
+
 const slides = [
-  { label: 'Chapter members at a community service event', variant: 1 },
-  { label: 'Links members celebrating at a chapter gala', variant: 3 },
-  { label: 'Youth mentees with Links volunteers', variant: 2 },
+  {
+    src: chapterConferenceGroup,
+    alt: 'Jacksonville Links members gathered together at a chapter conference, dressed in green and white',
+  },
+  {
+    src: chapterFormalPortrait,
+    alt: 'Jacksonville Links members in formal white attire posing together on a staircase',
+  },
+  {
+    src: chapterMeeting,
+    alt: 'Jacksonville Links members at a chapter meeting',
+  },
 ];
 ---
 
 <section class="hero" aria-label="Welcome">
   <div class="hero__slides" role="group" aria-roledescription="carousel" aria-label="Chapter photos">
     {slides.map((slide, i) => (
-      <div class:list={['hero__slide', `hero__slide--v${slide.variant}`]} data-slide={i} aria-hidden={i === 0 ? 'false' : 'true'}>
-        <span class="hero__slide-badge">Placeholder — {slide.label}</span>
+      <div class="hero__slide" data-slide={i} aria-hidden={i === 0 ? 'false' : 'true'}>
+        <Image
+          src={slide.src}
+          alt={slide.alt}
+          width={1600}
+          class="hero__slide-img"
+          loading={i === 0 ? 'eager' : 'lazy'}
+          fetchpriority={i === 0 ? 'high' : 'auto'}
+        />
       </div>
     ))}
   </div>
@@ -56,6 +77,7 @@ const slides = [
   .hero__slides {
     position: absolute;
     inset: 0;
+    background: var(--color-forest-deep);
   }
 
   .hero__slide {
@@ -63,16 +85,20 @@ const slides = [
     inset: 0;
     opacity: 0;
     transition: opacity 1.6s ease-in-out;
-    animation: kenburns 18s ease-in-out infinite;
+    overflow: hidden;
   }
 
   .hero__slide[aria-hidden='false'] {
     opacity: 1;
   }
 
-  .hero__slide--v1 { background: linear-gradient(140deg, #2d6a4f, #16352a 70%); }
-  .hero__slide--v2 { background: linear-gradient(150deg, #1b4332, #274d3b 55%, #0e2019); }
-  .hero__slide--v3 { background: linear-gradient(155deg, #274d3b, #1b4332 40%, #c9a961 175%); }
+  .hero__slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    animation: kenburns 18s ease-in-out infinite;
+  }
 
   @keyframes kenburns {
     0% { transform: scale(1); }
@@ -80,25 +106,10 @@ const slides = [
     100% { transform: scale(1); }
   }
 
-  .hero__slide-badge {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: rgba(0, 0, 0, 0.35);
-    color: rgba(255, 255, 255, 0.85);
-    padding: 0.4em 0.8em;
-    border-radius: 999px;
-  }
-
   .hero__scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(0deg, rgba(9, 22, 17, 0.92) 0%, rgba(9, 22, 17, 0.55) 42%, rgba(9, 22, 17, 0.35) 65%, rgba(9, 22, 17, 0.55) 100%);
+    background: linear-gradient(0deg, rgba(9, 22, 17, 0.92) 0%, rgba(9, 22, 17, 0.6) 42%, rgba(9, 22, 17, 0.4) 65%, rgba(9, 22, 17, 0.6) 100%);
   }
 
   .hero__content {
@@ -200,7 +211,7 @@ const slides = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__slide {
+    .hero__slide-img {
       animation: none;
     }
     .hero__scroll-cue span {

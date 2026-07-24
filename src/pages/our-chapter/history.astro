@@ -1,9 +1,11 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
 import PlaceholderImage from '../../components/PlaceholderImage.astro';
 import { NAV, FIRST_OFFICERS } from '../../data/site';
+import nationalFounders from '../../assets/images/history/national-founders.jpg';
 
 const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 
@@ -12,6 +14,8 @@ const timeline = [
     year: '1946',
     title: 'The Links, Incorporated Founded',
     body: 'The Links, Incorporated is established as an international, not-for-profit corporation dedicated to friendship and service.',
+    image: nationalFounders,
+    imageAlt: 'Margaret Roselle Hawkins and Sarah Strickland Scott, founders of The Links, Incorporated',
   },
   {
     year: '1966',
@@ -51,6 +55,11 @@ const timeline = [
           <div class="timeline__content">
             <h3>{item.title}</h3>
             <p>{item.body}</p>
+            {'image' in item && item.image && (
+              <figure class="timeline__figure">
+                <Image src={item.image} alt={item.imageAlt ?? ''} width={200} height={140} class="timeline__figure-img" />
+              </figure>
+            )}
           </div>
         </div>
       ))}
@@ -136,6 +145,19 @@ const timeline = [
 
   .timeline__content h3 {
     margin-bottom: 0.4rem;
+  }
+
+  .timeline__figure {
+    margin: 0.75rem 0 0;
+  }
+
+  .timeline__figure-img {
+    width: 160px;
+    height: auto;
+    aspect-ratio: 10/7;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-card);
   }
 
   .founders {

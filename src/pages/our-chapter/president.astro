@@ -1,9 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
-import PlaceholderImage from '../../components/PlaceholderImage.astro';
 import { NAV, SITE } from '../../data/site';
+import presidentPortrait from '../../assets/images/president/portrait.jpg';
 
 const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 ---
@@ -18,7 +19,13 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
   <section class="section">
     <div class="container letter-grid">
       <div class="letter-grid__portrait" data-reveal>
-        <PlaceholderImage label={`Portrait of President ${SITE.president}`} ratio="4/5" rounded="lg" variant={3} />
+        <Image
+          src={presidentPortrait}
+          alt={`Portrait of ${SITE.president}, President of the Jacksonville (FL) Chapter of The Links, Incorporated`}
+          width={420}
+          height={560}
+          class="letter-grid__portrait-img"
+        />
         <p class="letter-grid__caption">
           <strong>{SITE.president}</strong><br />
           President, {SITE.name}
@@ -64,6 +71,15 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 
   .letter-grid__portrait {
     max-width: 340px;
+  }
+
+  .letter-grid__portrait-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
   }
 
   .letter-grid__caption {

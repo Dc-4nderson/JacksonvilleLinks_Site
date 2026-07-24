@@ -1,5 +1,13 @@
 // Central site content. A non-technical admin editing copy should only ever
 // need to touch this file (and the individual page .astro files for prose).
+import type { ImageMetadata } from 'astro';
+import healthHumanServicesImage from '../assets/images/facets/health-and-human-services/schell-sweet-banner.jpg';
+import healthHumanServicesRibbonCutting from '../assets/images/facets/health-and-human-services/ribbon-cutting.jpg';
+import internationalTrendsImage from '../assets/images/facets/international-trends-services/gems-cuisine-tasting.jpg';
+import internationalTrendsHaiti from '../assets/images/facets/international-trends-services/gems-speaker-haiti.jpg';
+import internationalTrendsNigeria from '../assets/images/facets/international-trends-services/gems-speaker-nigeria.jpg';
+import internationalTrendsBahamas from '../assets/images/facets/international-trends-services/gems-speaker-bahamas.jpg';
+import internationalTrendsCarePackages from '../assets/images/facets/international-trends-services/haiti-care-packages.jpg';
 
 export const SITE = {
   name: 'The Jacksonville (FL) Chapter of The Links, Incorporated',
@@ -63,6 +71,9 @@ export type Facet = {
   mission: string;
   highlights: string[];
   paragraphs: string[];
+  image?: ImageMetadata;
+  imageAlt?: string;
+  gallery?: { src: ImageMetadata; alt: string }[];
 };
 
 export const FACETS: Facet[] = [
@@ -143,6 +154,14 @@ export const FACETS: Facet[] = [
       'A recent program year emphasized Haiti, supporting 34 orphans at the Ecole Yahve Schamma de Petit Place in Cazeau. Members prepared individual care packages for each child and provided bulk donations to the orphanage.',
       'The facet also conducted a workshop exposing our GEMS youth group to international perspectives, with speakers from Nigeria, Haiti, and the Bahamas sharing cultural insight alongside a tasting of international cuisine.',
     ],
+    image: internationalTrendsImage,
+    imageAlt: 'GEMS youth group members sampling international cuisine at an International Trends & Services workshop',
+    gallery: [
+      { src: internationalTrendsHaiti, alt: 'A guest speaker discussing Haiti with the GEMS youth group in front of international flags' },
+      { src: internationalTrendsNigeria, alt: 'A presentation board on Nigeria shared with the GEMS youth group' },
+      { src: internationalTrendsBahamas, alt: 'A guest speaker addressing the GEMS youth group' },
+      { src: internationalTrendsCarePackages, alt: 'Jacksonville Links members preparing individually labeled care packages for orphans in Cazeau, Haiti' },
+    ],
   },
   {
     slug: 'health-and-human-services',
@@ -160,19 +179,27 @@ export const FACETS: Facet[] = [
       'HeartLinks to Heart Health engages the community to take an aggressive stance against heart disease. Linkages to Life educates the African-American community about the importance of organ, tissue, and bone marrow donation. Walk for Healthy Living promotes daily exercise and nutrition through events like the Heart Walk and Susan G. Komen Walk.',
       'The Jacksonville Chapter has supported the Schell-Sweet Community Center and Clinic at Edward Waters College, and continues to develop mental health stigma reduction efforts and healthy-choice programming for youth.',
     ],
+    image: healthHumanServicesImage,
+    imageAlt: 'Jacksonville Links members holding a chapter banner at the Schell-Sweet Community Resource Centre',
+    gallery: [
+      { src: healthHumanServicesRibbonCutting, alt: 'Jacksonville Links members and community partners at a ribbon-cutting ceremony' },
+    ],
   },
 ];
 
+// `card` officers have a finished graphic (real photo + name/title already
+// baked in by the chapter) — rendered as-is, no extra HTML caption needed.
+// The president uses a plain portrait photo captioned in HTML as usual.
 export const OFFICERS = [
-  { name: 'Marti Forchion Chapman', title: 'President' },
-  { name: 'Lisa Smith', title: 'Vice President' },
-  { name: 'To Be Announced', title: 'Recording Secretary' },
-  { name: 'To Be Announced', title: 'Corresponding Secretary' },
-  { name: 'To Be Announced', title: 'Financial Secretary' },
-  { name: 'To Be Announced', title: 'Treasurer' },
-  { name: 'To Be Announced', title: 'Programming Chair' },
-  { name: 'To Be Announced', title: 'Parliamentarian' },
-  { name: 'To Be Announced', title: 'Chaplain' },
+  { name: 'Marti Forchion Chapman', title: 'President', photo: 'portrait' as const },
+  { name: 'Lisa Smith', title: 'Vice President', card: 'vice-president' as const },
+  { name: 'Reba Barkley', title: 'Recording Secretary', card: 'recording-secretary' as const },
+  { name: 'Crystal Charles', title: 'Corresponding Secretary', card: 'corresponding-secretary' as const },
+  { name: 'Yvonne McClain Gomes', title: 'Financial Secretary', card: 'financial-secretary' as const },
+  { name: 'Deidra Williams-Johnson', title: 'Treasurer', card: 'treasurer' as const },
+  { name: 'Juanita Fletcher Cone', title: 'Programming Chair', card: 'programming-chair' as const },
+  { name: 'Cynthia Nixon', title: 'Parliamentarian', card: 'parliamentarian' as const },
+  { name: 'Kim Brooks Hall', title: 'Chaplain', card: 'chaplain' as const },
 ];
 
 export const CHAPTER_MEMBERS = [
@@ -228,5 +255,5 @@ export const FIRST_OFFICERS = [
 
 export const EXTERNAL_LINKS = [
   { label: 'The Links, Incorporated (National)', href: 'https://linksinc.org/' },
-  { label: 'South Atlantic Area', href: 'https://salinksinc.org/' },
+  { label: 'Southern Area', href: 'https://salinksinc.org/' },
 ];

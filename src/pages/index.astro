@@ -1,9 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
 import FacetCard from '../components/FacetCard.astro';
-import PlaceholderImage from '../components/PlaceholderImage.astro';
-import { SITE, FACETS, CHAPTER_MEMBERS } from '../data/site';
+import { SITE, FACETS } from '../data/site';
+import presidentPortrait from '../assets/images/president/portrait.jpg';
 ---
 
 <Layout
@@ -23,12 +24,18 @@ import { SITE, FACETS, CHAPTER_MEMBERS } from '../data/site';
         <span class="stats__num">5</span>
         <span class="stats__label">Program Facets</span>
       </div>
-      <div class="stats__item">
-        <span class="stats__num">$150K+</span>
+      {/*
+        TODO(client): these two figures are unconfirmed — do not replace
+        with a guessed number. Swap in the real total once the chapter
+        sends it, then restyle back to a normal .stats__item like the two
+        above (drop stats__item--pending and stats__num--pending).
+      */}
+      <div class="stats__item stats__item--pending">
+        <span class="stats__num stats__num--pending">[CONFIRM: dollars donated]</span>
         <span class="stats__label">Donated to Local Organizations</span>
       </div>
-      <div class="stats__item">
-        <span class="stats__num">{CHAPTER_MEMBERS.length}</span>
+      <div class="stats__item stats__item--pending">
+        <span class="stats__num stats__num--pending">[CONFIRM: member count]</span>
         <span class="stats__label">Active Chapter Members</span>
       </div>
     </div>
@@ -54,7 +61,13 @@ import { SITE, FACETS, CHAPTER_MEMBERS } from '../data/site';
   <section class="section president">
     <div class="container president__grid">
       <div class="president__media" data-reveal>
-        <PlaceholderImage label="Portrait of President Marti Forchion Chapman" ratio="4/5" rounded="lg" variant={3} />
+        <Image
+          src={presidentPortrait}
+          alt={`Portrait of ${SITE.president}, President of the Jacksonville (FL) Chapter of The Links, Incorporated`}
+          width={420}
+          height={560}
+          class="president__portrait"
+        />
       </div>
       <div class="president__copy" data-reveal>
         <p class="eyebrow">A Message From Our President</p>
@@ -126,6 +139,41 @@ import { SITE, FACETS, CHAPTER_MEMBERS } from '../data/site';
     opacity: 0.75;
   }
 
+  /* Visually distinct from confirmed stats until real figures arrive */
+  .stats__item--pending {
+    position: relative;
+    padding-top: 1.5rem;
+  }
+
+  .stats__item--pending::before {
+    content: 'Pending Confirmation';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-forest-deep);
+    background: var(--color-gold-light);
+    padding: 0.25em 0.65em;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .stats__num--pending {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--color-body);
+    opacity: 0.6;
+    border: 1.5px dashed var(--color-line);
+    border-radius: var(--radius-sm);
+    padding: 0.6em 0.5em;
+  }
+
   .facets__intro {
     max-width: 720px;
     margin-bottom: 3rem;
@@ -150,6 +198,15 @@ import { SITE, FACETS, CHAPTER_MEMBERS } from '../data/site';
   .president__media {
     max-width: 420px;
     margin-inline: auto;
+  }
+
+  .president__portrait {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
   }
 
   .president__quote {
