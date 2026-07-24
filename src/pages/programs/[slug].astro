@@ -1,0 +1,172 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SubNav from '../../components/SubNav.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+import { NAV, FACETS } from '../../data/site';
+
+export function getStaticPaths() {
+  return FACETS.map((facet, i) => ({
+    params: { slug: facet.slug },
+    props: { facet, index: i },
+  }));
+}
+
+const { facet, index } = Astro.props;
+const programsNav = NAV.find((n) => n.label === 'Programs')!.children!;
+const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
+const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
+---
+
+<Layout title={facet.name} description={facet.summary}>
+  <PageHero eyebrow="Programs" title={facet.name} lede={facet.summary} />
+  <SubNav items={programsNav} />
+
+  <section class="section">
+    <div class="container facet-detail">
+      <div class="facet-detail__media" data-reveal>
+        <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
+        {facet.quote && (
+          <blockquote class="facet-detail__quote">
+            <p>&ldquo;{facet.quote.text}&rdquo;</p>
+            <cite>— {facet.quote.attribution}</cite>
+          </blockquote>
+        )}
+      </div>
+      <div class="facet-detail__body" data-reveal>
+        <p class="facet-detail__mission">{facet.mission}</p>
+        {facet.paragraphs.map((p) => <p>{p}</p>)}
+
+        {facet.highlights.length > 0 && (
+          <>
+            <h3>Chapter Highlights</h3>
+            <ul class="facet-detail__highlights">
+              {facet.highlights.map((h) => <li>{h}</li>)}
+            </ul>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight other-facets">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Explore More</p>
+      <h2 data-reveal>Other Program Facets</h2>
+      <div class="other-facets__grid" data-reveal-group>
+        {otherFacets.map((f) => (
+          <a class="other-facets__item" href={f.href}>
+            {f.name}
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+              <path d="M11 1L15 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 5H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .facet-detail {
+    display: grid;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .facet-detail__quote {
+    margin: 1.5rem 0 0;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-cream-dim);
+    border-left: 3px solid var(--color-gold);
+    border-radius: var(--radius-sm);
+  }
+
+  .facet-detail__quote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--color-ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .facet-detail__quote cite {
+    font-size: 0.85rem;
+    color: var(--color-emerald);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .facet-detail__mission {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-forest);
+    max-width: 56ch;
+  }
+
+  .facet-detail__highlights {
+    display: grid;
+    gap: 0.6rem;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .facet-detail__highlights li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .facet-detail__highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--color-gold);
+    transform: rotate(45deg);
+  }
+
+  .other-facets {
+    background: var(--color-cream-dim);
+  }
+
+  .other-facets__grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .other-facets__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.4rem;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-ink);
+    font-weight: 600;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+
+  .other-facets__item:hover {
+    transform: translateX(4px);
+    color: var(--color-forest);
+  }
+
+  @media (min-width: 900px) {
+    .facet-detail {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .other-facets__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

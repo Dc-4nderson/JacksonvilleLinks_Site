@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SubNav from '../../components/SubNav.astro';
+import PlaceholderImage from '../../components/PlaceholderImage.astro';
+import { NAV, SITE } from '../../data/site';
+
+const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
+---
+
+<Layout
+  title="Our Chapter"
+  description="Meet the Jacksonville (FL) Chapter of The Links, Incorporated — our president, our history since 1966, our officers, and our members."
+>
+  <PageHero
+    eyebrow="Our Chapter"
+    title="Sixty Years of Friendship and Service"
+    lede={`Since ${SITE.founded}, the Jacksonville Chapter has united accomplished women in a shared commitment to friendship and service across our community.`}
+  />
+  <SubNav items={ourChapterNav} />
+
+  <section class="section">
+    <div class="container overview-grid">
+      <div data-reveal>
+        <PlaceholderImage label="Chapter members group portrait" ratio="4/3" rounded="lg" variant={2} />
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">Who We Are</p>
+        <h2>An Enduring Sisterhood of Service</h2>
+        <p>
+          The Jacksonville (FL) Chapter of The Links, Incorporated was officially installed on
+          November 12, 1966 as the Southern Area's 27th chapter. Fifteen founding members
+          answered the call to bring the organization's mission of friendship and service to
+          Jacksonville — a legacy that our members continue to carry forward today.
+        </p>
+        <p>
+          Explore our chapter's story below: read a welcome from our president, trace our
+          history from 1966 to today, meet our officers, and browse our chapter, alumna, and
+          charter member rosters.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight links-grid-section">
+    <div class="container">
+      <div class="links-grid" data-reveal-group>
+        {ourChapterNav.map((item) => (
+          <a class="links-grid__item" href={item.href}>
+            <span>{item.label}</span>
+            <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true">
+              <path d="M11 1L15 5L11 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 5H1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .overview-grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .links-grid-section {
+    background: var(--color-cream-dim);
+  }
+
+  .links-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .links-grid__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-weight: 600;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  }
+
+  .links-grid__item:hover {
+    transform: translateX(4px);
+    color: var(--color-forest);
+  }
+
+  @media (min-width: 900px) {
+    .overview-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+    .links-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+interface Item { label: string; href: string; }
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="subnav" aria-label="Section pages">
+  <div class="container subnav__inner">
+    <ul>
+      {items.map((item) => (
+        <li>
+          <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .subnav {
+    position: sticky;
+    top: 68px;
+    z-index: 50;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-line);
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .subnav__inner ul {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+  }
+
+  .subnav a {
+    display: inline-block;
+    padding: 1rem 1rem;
+    text-decoration: none;
+    color: var(--color-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+  }
+
+  .subnav a:hover {
+    color: var(--color-forest);
+  }
+
+  .subnav a[aria-current='page'] {
+    color: var(--color-forest);
+    border-bottom-color: var(--color-gold);
+    font-weight: 600;
+  }
+</style>

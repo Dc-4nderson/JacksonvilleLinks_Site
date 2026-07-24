@@ -1,0 +1,103 @@
+---
+// Stand-in for real chapter photography. Renders a soft green-tinted
+// gradient block with a visible "PLACEHOLDER" watermark and a label
+// describing what real photo should go here, so it's obvious to the
+// client which images still need to be sourced before launch.
+interface Props {
+  label: string;
+  ratio?: string; // e.g. '16/9', '4/5', '1/1'
+  rounded?: 'sm' | 'md' | 'lg' | 'full';
+  variant?: 1 | 2 | 3 | 4;
+  class?: string;
+}
+
+const {
+  label,
+  ratio = '4/3',
+  rounded = 'md',
+  variant = 1,
+  class: className = '',
+} = Astro.props;
+
+const radii = {
+  sm: 'var(--radius-sm)',
+  md: 'var(--radius-md)',
+  lg: 'var(--radius-lg)',
+  full: '999px',
+};
+---
+
+<div
+  class:list={['placeholder-img', `placeholder-img--v${variant}`, className]}
+  style={{ aspectRatio: ratio, borderRadius: radii[rounded] }}
+  role="img"
+  aria-label={`Placeholder image: ${label}`}
+>
+  <span class="placeholder-img__badge">Placeholder</span>
+  <span class="placeholder-img__label">{label}</span>
+</div>
+
+<style>
+  .placeholder-img {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem;
+    isolation: isolate;
+  }
+
+  .placeholder-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .placeholder-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.06) 0px,
+        rgba(255, 255, 255, 0.06) 1px,
+        transparent 1px,
+        transparent 14px
+      );
+  }
+
+  .placeholder-img--v1::before { background: linear-gradient(135deg, #2d6a4f, #1b4332 65%, #10261c); }
+  .placeholder-img--v2::before { background: linear-gradient(135deg, #40795c, #1b4332 60%, #12281f); }
+  .placeholder-img--v3::before { background: linear-gradient(140deg, #1b4332, #274d3b 45%, #c9a961 150%); }
+  .placeholder-img--v4::before { background: linear-gradient(160deg, #274d3b, #16352a 70%); }
+
+  .placeholder-img__badge {
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-forest-deep);
+    background: var(--color-gold);
+    padding: 0.35em 0.7em;
+    border-radius: 999px;
+  }
+
+  .placeholder-img__label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.88);
+    background: rgba(18, 44, 34, 0.55);
+    padding: 0.4em 0.75em;
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(2px);
+  }
+</style>
