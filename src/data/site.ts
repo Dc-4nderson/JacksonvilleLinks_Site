@@ -91,6 +91,15 @@ export type Facet = {
   imageAlt?: string;
   gallery?: { src: ImageMetadata; alt: string }[];
   hideCardImage?: boolean;
+  partners?: Partner[];
+};
+
+export type Partner = {
+  name: string;
+  description: string;
+  contact: string;
+  ctaLabel: string;
+  ctaHref: string;
 };
 
 export const FACETS: Facet[] = [
@@ -121,6 +130,15 @@ export const FACETS: Facet[] = [
       'Services to Youth was The Links, Incorporated’s first program, established to equip Black youth with the intellectual and achievement-oriented tools to become successful, productive citizens. It remains rooted in an integrated approach that addresses the academic, health, cultural, social awareness, career development, and mentoring needs of the young people we serve — including active, healthy living, since children who stay active see greater school success and self-esteem.',
       'Our chapter has a long history of hands-on programming, from Project LEAD: High Expectations and the Little Sisters of Links mentoring program, to literacy initiatives like Great Girls + Great Books = Great Readers, to cultural enrichment through Ritz Museum tours and Nutcracker Ballet sponsorships.',
       'Recent goals include a partnership with the Links-NSBE Jr. Club, monthly mentoring, STEAM career development, college readiness programming, financial literacy instruction, HBCU promotion, and college scholarship awards.',
+    ],
+    partners: [
+      {
+        name: 'Literacy Alliance of Northeast Florida',
+        description: 'Free adult education for learners 16 and up — reading and math classes, one-on-one tutoring, and preparation for a high school equivalency diploma. Classes meet at the duPont Center or online.',
+        contact: '40 East Adams Street, Jacksonville, FL · (904) 238-9000',
+        ctaLabel: 'View Flyer (PDF)',
+        ctaHref: '/documents/literacy-alliance-flyer.pdf',
+      },
     ],
   },
   {
