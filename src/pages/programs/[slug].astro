@@ -67,17 +67,29 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
       </div>
     )}
 
-    {facet.partners && facet.partners.length > 0 && (
-      <div class="container facet-detail__partners" data-reveal>
-        <p class="eyebrow">Community Partner</p>
-        {facet.partners.map((partner) => (
-          <div class="partner-card">
-            <h3>{partner.name}</h3>
-            <p>{partner.description}</p>
-            <p class="partner-card__contact">{partner.contact}</p>
-            <a href={partner.ctaHref} class="btn btn--outline btn--sm" target="_blank" rel="noopener noreferrer">
-              {partner.ctaLabel}
-            </a>
+    {facet.resources && facet.resources.length > 0 && (
+      <div class="container facet-detail__resources" data-reveal>
+        <p class="eyebrow">Local Resource</p>
+        {facet.resources.map((resource) => (
+          <div class="resource-card">
+            {resource.flyer && (
+              <Image
+                src={resource.flyer.src}
+                alt={resource.flyer.alt}
+                width={480}
+                class="resource-card__flyer"
+              />
+            )}
+            <div class="resource-card__body">
+              <h3>{resource.name}</h3>
+              {resource.description && <p>{resource.description}</p>}
+              {resource.contact && <p class="resource-card__contact">{resource.contact}</p>}
+              {resource.ctaHref && (
+                <a href={resource.ctaHref} class="btn btn--outline btn--sm" target="_blank" rel="noopener noreferrer">
+                  {resource.ctaLabel}
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -135,11 +147,14 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
     box-shadow: var(--shadow-card);
   }
 
-  .facet-detail__partners {
+  .facet-detail__resources {
     margin-top: 2.5rem;
   }
 
-  .partner-card {
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     background: var(--color-cream-dim);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-lg);
@@ -147,19 +162,41 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
     max-width: 640px;
   }
 
-  .partner-card h3 {
+  .resource-card__flyer {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    margin-inline: auto;
+  }
+
+  .resource-card__body h3 {
     margin-bottom: 0.6rem;
   }
 
-  .partner-card p {
+  .resource-card__body p {
     font-size: 0.95rem;
   }
 
-  .partner-card__contact {
+  .resource-card__contact {
     font-size: 0.85rem;
     color: var(--color-emerald);
     font-weight: 600;
     margin-bottom: 1.25rem;
+  }
+
+  @media (min-width: 560px) {
+    .resource-card:has(.resource-card__flyer) {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .resource-card__flyer {
+      max-width: 200px;
+      flex-shrink: 0;
+      margin-inline: 0;
+    }
   }
 
   @media (min-width: 700px) {
