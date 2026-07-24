@@ -90,6 +90,7 @@ export type Facet = {
   image?: ImageMetadata;
   imageAlt?: string;
   gallery?: { src: ImageMetadata; alt: string }[];
+  hideCardImage?: boolean;
 };
 
 export const FACETS: Facet[] = [
@@ -127,7 +128,8 @@ export const FACETS: Facet[] = [
     name: 'The Arts',
     href: '/programs/the-arts/',
     summary: 'Enriching the quality of life of our youth and communities through educational and engaging art experiences.',
-    mission: 'Rooted in co-founder Margaret Roselle Hawkins’ artistic legacy and established in 1964, The Arts facet is dedicated to Linking Art Through Transformative Programming.',
+    mission: 'Linking Art Through Transformative Programming.',
+    hideCardImage: true,
     highlights: [
       'Classics Through The Ages',
       'National Poster Art Contest',
@@ -135,9 +137,10 @@ export const FACETS: Facet[] = [
       'Artist Noir',
     ],
     paragraphs: [
-      'The Arts facet is rooted in co-founder Margaret Roselle Hawkins’ artistic legacy. Her talent, discovered at a young age, earned her a four-year scholarship to the Women’s School of Design — later the Moore Institute of Art — and led to her work as an art teacher. That passion for creative expression helped establish The Arts as a national facet in 1964 at the 14th National Assembly.',
-      'Classics Through The Ages increases African-American youth engagement with classical arts, giving talented students the chance to develop their skills and pursue educational and career pathways. The National Poster Art Contest features health-themed artwork promoting healthy, energetic, active lifestyles.',
-      'Taking STEM into STEAM integrates art into STEM education, including symphonic partnerships and quilting collaborations, while Artist Noir expands into literary, theater, and visual arts — from watercolors and fashion design to sculpture, drama, spoken word, and dance.',
+      'The Links, Incorporated’s support of the arts can be traced to our cultured co-founder Margaret Roselle Hawkins. Her innate artistic talent, discovered at a young age, earned her a four-year scholarship to the Women’s School of Design, later known as the Moore Institute of Art. Her passion for creative expression later led to her appointment as an art teacher, and helped give root to the establishment of The Arts facet in 1964 at the 14th National Assembly.',
+      'The goal of The Arts facet is to produce and support programs to enrich the quality of life of our youth and communities through educational and engaging art experiences — Transforming Communities and Fulfilling Our Purpose.',
+      'National Signature Arts Program Summary: Classics Through The Ages focuses on increasing the interest, knowledge, and participation of African-American youth in the classical arts, affording exemplary student artists opportunities to hone their skills and earn recognition and support for their educational and career pursuits. The National Poster Art Contest includes health-related themes, seeking to depict healthy, energetic, active lifestyles.',
+      'Taking STEM into STEAM brings art into the educational mix — helping students learn that there are multiple ways to reach a conclusion, garner greater flexibility in how they learn, and gain deeper understanding for problem solving. Past projects have included partnerships with symphonies and Connecting Threads through quilt making. Artist Noir, modeled after Classics Through The Ages, includes literary, theater, and visual arts, encouraging multi-arts disciplines such as watercolors, fashion design, sculpture, drama, spoken word, and dance.',
     ],
   },
   {

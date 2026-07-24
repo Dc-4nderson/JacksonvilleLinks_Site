@@ -12,20 +12,22 @@ const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
 ---
 
 <a class="facet-card" href={facet.href}>
-  <div class="facet-card__media">
-    {facet.image ? (
-      <Image
-        src={facet.image}
-        alt={facet.imageAlt ?? `${facet.name} program photo`}
-        width={480}
-        height={360}
-        class="facet-card__img"
-      />
-    ) : (
-      <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
-    )}
-  </div>
-  <div class="facet-card__body">
+  {!facet.hideCardImage && (
+    <div class="facet-card__media">
+      {facet.image ? (
+        <Image
+          src={facet.image}
+          alt={facet.imageAlt ?? `${facet.name} program photo`}
+          width={480}
+          height={360}
+          class="facet-card__img"
+        />
+      ) : (
+        <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
+      )}
+    </div>
+  )}
+  <div class:list={['facet-card__body', { 'facet-card__body--no-media': facet.hideCardImage }]}>
     <span class="facet-card__index">{String(index + 1).padStart(2, '0')}</span>
     <h3>{facet.name}</h3>
     <p>{facet.summary}</p>
@@ -85,6 +87,10 @@ const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
   .facet-card__body {
     padding: 1.5rem 0.85rem 0.75rem;
     position: relative;
+  }
+
+  .facet-card__body--no-media {
+    padding-top: 1.85rem;
   }
 
   .facet-card__index {
