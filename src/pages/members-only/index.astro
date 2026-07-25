@@ -1,12 +1,21 @@
 ---
 // NOTE FOR THE CLIENT: this is a UI-only "gate" — static sites cannot
 // truly password-protect a page (the Handbook/Calendar stub pages remain
-// reachable by direct URL). Before real member content goes here, wire up
-// real access control (e.g. host-level HTTP auth, Netlify/Vercel password
-// protection, or a login-gated member portal).
+// reachable by direct URL, and this password is readable by anyone who
+// views the page source, since it has to ship in the browser JS to be
+// checked at all). It stops casual browsing, not a determined visitor.
+// Before real member content goes here, wire up real access control
+// (e.g. host-level HTTP auth, Netlify/Vercel password protection, or a
+// login-gated member portal).
+//
+// The password itself lives in the PUBLIC_MEMBERS_PASSWORD env var (see
+// .env.example / README) instead of being hardcoded, so it can be changed
+// without a code edit — but see the note above: it is not a secret.
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SITE } from '../../data/site';
+
+const gatePassword = import.meta.env.PUBLIC_MEMBERS_PASSWORD ?? '';
 ---
 
 <Layout
@@ -34,6 +43,7 @@ import { SITE } from '../../data/site';
           <input type="password" id="gate-password" name="password" placeholder="Enter chapter password" autocomplete="off" />
           <button type="submit" class="btn btn--primary">Continue</button>
         </form>
+        <p class="gate__error" id="gate-error" hidden>Incorrect password. Please try again.</p>
         <p class="gate__help">
           Don't have the password? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> to request access.
         </p>
@@ -114,6 +124,12 @@ import { SITE } from '../../data/site';
     border-color: var(--color-emerald);
   }
 
+  .gate__error {
+    font-size: 0.85rem;
+    color: #b3261e;
+    margin: -0.75rem 0 1.25rem;
+  }
+
   .gate__help {
     font-size: 0.85rem;
     opacity: 0.75;
@@ -162,14 +178,24 @@ import { SITE } from '../../data/site';
   }
 </style>
 
-<script>
-  const form = document.getElementById('gate-form') as HTMLFormElement | null;
+<script define:vars={{ gatePassword }}>
+  const form = document.getElementById('gate-form');
   const resources = document.getElementById('gate-resources');
+  const passwordInput = document.getElementById('gate-password');
+  const errorMsg = document.getElementById('gate-error');
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Cosmetic only — see note in frontmatter. Any non-empty submission reveals the links.
-    resources?.removeAttribute('hidden');
-    resources?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Cosmetic only — see note in frontmatter. This checks against
+    // PUBLIC_MEMBERS_PASSWORD, which ships in the page's JS bundle and is
+    // therefore visible to anyone who views source. It is not real security.
+    const entered = passwordInput?.value ?? '';
+    if (gatePassword && entered === gatePassword) {
+      errorMsg?.setAttribute('hidden', '');
+      resources?.removeAttribute('hidden');
+      resources?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      errorMsg?.removeAttribute('hidden');
+    }
   });
 </script>

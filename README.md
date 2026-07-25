@@ -10,6 +10,7 @@ Static site for the Jacksonville Chapter, built with [Astro](https://astro.build
 
 ```bash
 npm install
+cp .env.example .env   # then fill in PUBLIC_MEMBERS_PASSWORD
 ```
 
 ## Commands
@@ -44,6 +45,16 @@ A few things are intentionally placeholder pending real assets/copy from the cha
 - **Members Only → Handbook / Calendar** — stub pages; the current live site keeps this content password-protected so it wasn't available to migrate.
 - **Contact form** — UI only, not yet wired to a backend (e.g. Formspree, Netlify Forms). The `mailto:` link works today as a fallback.
 - **Members Only password gate** — cosmetic UI only. Static sites can't enforce real access control; real member content should sit behind actual server-side auth before anything sensitive is published there.
+
+## Environment variables
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `PUBLIC_MEMBERS_PASSWORD` | Yes | The password checked by the Members Only page gate (`/members-only`). |
+
+Set this in a local `.env` file for development (`cp .env.example .env`). **In Vercel**, add it under **Project → Settings → Environment Variables** (name `PUBLIC_MEMBERS_PASSWORD`, any environment) — it must be set there for the deployed site to have a working gate, since it's not committed to the repo. Redeploy after adding/changing it.
+
+⚠️ Because this is a static site, the `PUBLIC_` prefix is required for Astro to expose the value to the page's client-side script — which also means the password is compiled into the page's JS bundle and visible to anyone who views page source. It deters casual browsing only; it is not real access control. See the note in `src/pages/members-only/index.astro`.
 
 ## Deployment (Vercel)
 
