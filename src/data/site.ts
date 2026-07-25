@@ -254,10 +254,10 @@ export const FACETS: Facet[] = [
 export const OFFICERS = [
   { name: 'Marti Forchion Chapman', title: 'President', photo: 'portrait' as const, group: 'elected' as const },
   { name: 'Lisa Smith', title: 'Vice President', card: 'vice-president' as const, group: 'elected' as const },
-  { name: 'Reba Barkley', title: 'Recording Secretary', card: 'recording-secretary' as const, group: 'appointed' as const },
-  { name: 'Crystal Charles', title: 'Corresponding Secretary', card: 'corresponding-secretary' as const, group: 'appointed' as const },
-  { name: 'Yvonne McClain Gomes', title: 'Financial Secretary', card: 'financial-secretary' as const, group: 'appointed' as const },
-  { name: 'Deidra Williams-Johnson', title: 'Treasurer', card: 'treasurer' as const, group: 'appointed' as const },
+  { name: 'Reba Barkley', title: 'Recording Secretary', card: 'recording-secretary' as const, group: 'elected' as const },
+  { name: 'Crystal Charles', title: 'Corresponding Secretary', card: 'corresponding-secretary' as const, group: 'elected' as const },
+  { name: 'Yvonne McClain Gomes', title: 'Financial Secretary', card: 'financial-secretary' as const, group: 'elected' as const },
+  { name: 'Deidra Williams-Johnson', title: 'Treasurer', card: 'treasurer' as const, group: 'elected' as const },
   { name: 'Juanita Fletcher Cone', title: 'Programming Chair', card: 'programming-chair' as const, group: 'appointed' as const },
   { name: 'Cynthia Nixon', title: 'Parliamentarian', card: 'parliamentarian' as const, group: 'appointed' as const },
   { name: 'Kim Brooks Hall', title: 'Chaplain', card: 'chaplain' as const, group: 'appointed' as const },
@@ -306,13 +306,53 @@ export const CHARTER_MEMBERS = [
   'Meltonia McGriff', 'Sara Stewart', 'Sadie Tillis',
 ];
 
-export const FIRST_OFFICERS = [
-  { name: 'Elinor Littlejohn', title: 'Chartering President' },
-  { name: 'Lois Iszard', title: 'Vice President' },
-  { name: 'Bessie Canty', title: 'Recording Secretary' },
-  { name: 'Sara Stewart', title: 'Financial Secretary' },
-  { name: 'Sadie Tillis', title: 'Treasurer' },
-];
+// The chapter's own tagline, used verbatim (as on the current live site,
+// including on the Officers page).
+export const LEGACY_TAGLINE = 'A Legacy in Every Link: 60 Years of Friendship and Service';
+
+// Verbatim text from jacksonvillelinksinc.org/our-chapter/ — copied as-is
+// per the chapter's request, not paraphrased. Edit only to match a real
+// update to the live site's wording.
+export const OUR_CHAPTER_CONTENT = {
+  linksIncorporated: [
+    'The Links, Incorporated was founded in 1946 by two civic-minded visionaries: Margaret Hawkins and Sarah Scott of Philadelphia, PA. Founded on the principles of friendship and service, they invited seven of their friends to join them in organizing a new kind of inter-city club. Over the years, the organization has provided critical support and programming across the cultural, educational, and socioeconomic landscape of the African American community.',
+    'Today, the Links, Inc. is one of the nation’s premier volunteer service organizations, with over 271 chapters in 41 states and abroad. The membership is comprised of leaders and trailblazers in the fields of medicine, law, science & technology, education, business, and entrepreneurship. The Links, Inc. continues its long-standing commitment to advancing the causes of African American people one chapter, one project, and one community at a time.',
+  ],
+  jacksonvilleChapter: [
+    'The Jacksonville Chapter of The Links, Incorporated was chartered in 1966 – we celebrated “50 years of Friendship and Service” in 2016 and continue to make an impact on the local community. Our chapter consists of leaders, newsmakers, activists, professionals, and volunteers working toward the realization of a better life for citizens of Jacksonville. The way we work is to develop and execute programs designed to transform lives for the better – ours through giving back, and others through what we give. For example, we have mentored our GEMS (Girls Empowered and Making Strides) at Edward Waters College and Eugene Butler Middle School in downtown Jacksonville and have witnessed profound changes first-hand.',
+    'The GEMS program uses an integrated approach in specific areas of learning and doing. To this end The Jacksonville Links have encouraged our GEMS to learn about and support families in Haiti who are less fortunate, taught them to embrace healthy living habits including sessions with health professionals and lessons on Zumba dancing, helped them to explore performing and visual arts including an exciting interactive sessions with Stage Aurora Representatives and taught our GEMS to assume a cultural identity with life skills and literary reinforcement.',
+    'We also hold a major fundraiser, our Western Gala, which helps us underwrite support for our programming and charities like the Edward Waters College Scholarship Endowment, the Heart Walk and childhood obesity initiatives in local schools. Sometimes we simply volunteer time and effort at local soup kitchens or Builders Care.',
+  ],
+  foundation: [
+    'The Links Foundation, Incorporated is the philanthropic arm of The Links, Incorporated, an organization of professional women of color located throughout the United States, the District of Columbia and the Commonwealth of the Bahamas. The Foundation was established in 1979 to enhance and expand the philanthropic endeavors of The Links, Incorporated. The Links, Incorporated has a long tradition of promoting and engaging in educational, civic and intercultural activities in order to enrich the lives of members of the communities we serve.',
+    'The Foundation provides grants to innovative programs that address problems to be solved, or opportunities to be seized, that are of regional, national or international significance. It has served The Links, Incorporated well as the conduit for grant support for special programs.',
+    'Under Foundation guidelines, grants are made to support the five program facets of The Links, Incorporated which include Services to Youth, The Arts, National Trends and Services, International Trends and Services, and Health and Human Services.',
+    'The Links Foundation, Incorporated has contributed more than $25 million to charitable causes since its founding. In 2014, The Links Foundation, Incorporated named its fourth $1 million grantee – the Smithsonian National Museum of African American Culture and History in Washington, D.C. Other million-dollar grantees include the United Negro College Fund, the NAACP Legal Defense and Educational Fund, Inc. and the National Civil Rights Museum.',
+    'In recent years, The Links Foundation, Incorporated has made donations to such entities as: Habitat for Humanity, for the rebuilding of homes in Haiti; Africare, for the construction of The Links maternal waiting homes and the assemblage of Mama Kits; and, National Cares Mentoring Movement, for the advancement of mentoring opportunities across the nation. Through its 2012 Grants-in-Aid program, $100,000 in grants was awarded to four non-profits – Club Esteem, Melbourne, Fla.; Kansas City Friends of Alvin Ailey, Kansas City, Kan.; Legacy Media Institute, Petersburg, Va.; and the National Dental Association, headquartered in Washington, DC.',
+  ],
+  visionLink: { label: 'Vision 20/20 – Read more', href: 'http://linksinc.org/vision2020/history/' },
+};
+
+// Verbatim text from jacksonvillelinksinc.org/history/ — copied as-is per
+// the chapter's request, not paraphrased.
+export const HISTORY_CONTENT = {
+  heading: 'The Links Incorporated, Jacksonville Chapter Local History',
+  paragraphs: [
+    'On November 12, 1966, the Jacksonville Chapter of The Links, Incorporated was officially installed. As it embarked upon its journey of friendship and service, the cumulative efforts from 1966 to now have resulted in a legacy of transformational programming, dedicated service and leadership in the Jacksonville community. The Charter Members of the Jacksonville Chapter were Mary Betsch, Glorya Brooks, Miriam Burney, Bessie Canty, Elizabeth Downing, Alethia Gibbs, Kate Graves, Lois Iszard, Mary Jones, Joyce Lawson, Elinor Littlejohn, Carolyn Miller, Meltonia McGriff, Sara Stewart and Sadie Tillis. The Chartering President was Elinor Littlejohn. Maude Reid, the Southern Area Director and the Southern Area officers provided guidance to the club in preparation of its chartering. Dollie Deselle Adams, National President, installed the Southern Area’s 27th chapter. The Tallahassee Chapter of The Links, Incorporated was the Sponsoring Chapter. The first chapter officers were: Elinor Littlejohn (President), Lois Iszard (Vice President) Bessie Canty (Recording Secretary) Sara Steward (Financial Secretary) and Sadie Tillis (Treasurer). Elinor Littlejohn was also the organizer of the club that became the Jacksonville Chapter.',
+    'Today as from the beginning, the Jacksonville Chapter is comprised of dedicated and distinguished women who believe in Friendship and Service. The chapter has been guided by its unwavering commitment toward improving the quality of life in our community – especially for those of African Ancestry through educational, civic and intercultural activities/programming. These efforts are primarily focused on the Jacksonville Community. However, the chapter has also provided funding and gifts far beyond our shores.',
+    'During the past five decades succeeding presidents have taken the helm and continued the commitment to enrich the lives of others in the Jacksonville community. This commitment is most evident in the chapter’s award-winning Umbrella Program, Girls Empowered and Motivated to Succeed, known by the acronym GEMS! The Jacksonville Chapter partnered with the New Town Success Zone (established in 2005) to establish a program at one of the underserved schools in the zone, Eugene Butler Middle School.',
+    'For more than six years the chapter partnered with the School Advisory Council (SAC) and the Boys & Girls (BOLD) after school program to develop a weekly program addressing social, health and educational issues impacting sixth-grade girls. This program was highly successful and proved to be transformational for these students. It was so successful that the chapter received the National FIRST PLACE Award for Umbrella Programming, 2012-2014 program year!',
+    'In addition to program events, the Jacksonville Chapter has sponsored the following community fundraisers that have generated significant contributions to local community agencies: The United Negro College Fund, Boy Scouts Camper-ship, Johnson Branch of YMCA, Eugene Butler Middle School (2006-2015) and Edward Waters College along with other local organizations are recipients of collective donations of more than $150,000 over the 50 plus years of The Jacksonville Chapter’s existence.',
+  ],
+  fundraisersIntro: 'Through the years the chapter has also hosted the following Fund Raisers:',
+  fundraisers: [
+    'Formal Masquerade Ball to benefit Sickle Cell Anemia Foundation (1981)',
+    'White Rose Brunch honoring local Black citizens of achievement (1983)',
+    'Night on The Annabel Lee to benefit Sickle Cell Foundation (1986)',
+    'Emerald Jazz Brunch at The Omni (2000)',
+    'Western Glitz / Gala – more than 15 years',
+  ],
+};
 
 export const EXTERNAL_LINKS = [
   { label: 'The Links, Incorporated (National)', href: 'https://linksinc.org/' },
