@@ -3,20 +3,19 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
-import PlaceholderImage from '../../components/PlaceholderImage.astro';
 import { NAV, FACETS } from '../../data/site';
 
 export function getStaticPaths() {
-  return FACETS.map((facet, i) => ({
+  return FACETS.map((facet) => ({
     params: { slug: facet.slug },
-    props: { facet, index: i },
+    props: { facet },
   }));
 }
 
-const { facet, index } = Astro.props;
+const { facet } = Astro.props;
 const programsNav = NAV.find((n) => n.label === 'Programs')!.children!;
-const variant = ((index % 4) + 1) as 1 | 2 | 3 | 4;
 const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
+const hasMedia = Boolean(facet.image || facet.quote);
 ---
 
 <Layout title={facet.name} description={facet.summary}>
@@ -24,26 +23,26 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
   <SubNav items={programsNav} />
 
   <section class="section">
-    <div class="container facet-detail">
-      <div class="facet-detail__media" data-reveal>
-        {facet.image ? (
-          <Image
-            src={facet.image}
-            alt={facet.imageAlt ?? `${facet.name} program photo`}
-            width={facet.largeGallery ? 900 : 640}
-            height={facet.largeGallery ? 675 : 480}
-            class="facet-detail__img"
-          />
-        ) : (
-          <PlaceholderImage label={`${facet.name} program photo`} ratio="4/3" rounded="lg" variant={variant} />
-        )}
-        {facet.quote && (
-          <blockquote class="facet-detail__quote">
-            <p>&ldquo;{facet.quote.text}&rdquo;</p>
-            <cite>— {facet.quote.attribution}</cite>
-          </blockquote>
-        )}
-      </div>
+    <div class:list={['container facet-detail', { 'facet-detail--full': !hasMedia }]}>
+      {hasMedia && (
+        <div class="facet-detail__media" data-reveal>
+          {facet.image && (
+            <Image
+              src={facet.image}
+              alt={facet.imageAlt ?? `${facet.name} program photo`}
+              width={facet.largeGallery ? 900 : 640}
+              height={facet.largeGallery ? 675 : 480}
+              class="facet-detail__img"
+            />
+          )}
+          {facet.quote && (
+            <blockquote class="facet-detail__quote">
+              <p>&ldquo;{facet.quote.text}&rdquo;</p>
+              <cite>— {facet.quote.attribution}</cite>
+            </blockquote>
+          )}
+        </div>
+      )}
       <div class="facet-detail__body" data-reveal>
         <p class="facet-detail__mission">{facet.mission}</p>
         {facet.paragraphs.map((p) => <p>{p}</p>)}
@@ -305,6 +304,14 @@ const otherFacets = FACETS.filter((f) => f.slug !== facet.slug);
   @media (min-width: 900px) {
     .facet-detail {
       grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .facet-detail--full {
+      grid-template-columns: 1fr;
+    }
+
+    .facet-detail--full .facet-detail__body {
+      max-width: 68ch;
     }
   }
 
