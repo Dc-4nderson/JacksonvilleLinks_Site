@@ -1,12 +1,18 @@
 ---
 // NOTE FOR THE CLIENT: this is a UI-only "gate" — static sites cannot
-// truly password-protect a page (the Handbook/Calendar stub pages remain
-// reachable by direct URL, and this password is readable by anyone who
-// views the page source, since it has to ship in the browser JS to be
-// checked at all). It stops casual browsing, not a determined visitor.
-// Before real member content goes here, wire up real access control
-// (e.g. host-level HTTP auth, Netlify/Vercel password protection, or a
-// login-gated member portal).
+// truly password-protect a page. A correct password sets a localStorage
+// flag (membersGateUnlocked) that the Handbook/Calendar pages check via
+// MembersGateGuard.astro; anyone who hasn't unlocked it and browses
+// straight to /members-only/handbook/ or /calendar/ gets bounced back
+// here. But this is a JS redirect, not real access control: the page's
+// HTML is still fully present in the static build (viewable via
+// view-source, curl, a crawler, or with JS disabled — the redirect
+// script simply never runs), and the password itself is readable by
+// anyone who views the page source, since it has to ship in the browser
+// JS to be checked at all. It stops casual browsing, not a determined
+// visitor. Before real member content goes here, wire up real access
+// control (e.g. host-level HTTP auth, Netlify/Vercel password
+// protection, or a login-gated member portal).
 //
 // The password itself lives in the PUBLIC_MEMBERS_PASSWORD env var (see
 // .env.example / README) instead of being hardcoded, so it can be changed
@@ -192,6 +198,10 @@ const gatePassword = import.meta.env.PUBLIC_MEMBERS_PASSWORD ?? '';
     const entered = passwordInput?.value ?? '';
     if (gatePassword && entered === gatePassword) {
       errorMsg?.setAttribute('hidden', '');
+      // Lets the Handbook/Calendar pages skip straight to their content on
+      // this browser instead of bouncing back here — see the redirect
+      // guard at the top of those pages. Still cosmetic, not real auth.
+      localStorage.setItem('membersGateUnlocked', '1');
       resources?.removeAttribute('hidden');
       resources?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {

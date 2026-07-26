@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
+import MembersGateGuard from '../../components/MembersGateGuard.astro';
 ---
 
 <Layout title="Chapter Handbook" description="Chapter Handbook for members of the Jacksonville (FL) Chapter of The Links, Incorporated.">
+  <MembersGateGuard />
   <PageHero eyebrow="Members Only" title="Chapter Handbook" />
 
   <section class="section">

@@ -1,0 +1,31 @@
+---
+// Redirects to the Members Only password screen when visited directly
+// without having unlocked it first (e.g. a bookmarked or shared link).
+// This is a client-side UX redirect, not real access control — the page's
+// HTML is still present in the static build and reachable by anyone who
+// fetches the URL directly (curl, view-source, a crawler, JS disabled).
+// See the note in members-only/index.astro for the full caveat.
+---
+
+<script>
+  if (!localStorage.getItem('membersGateUnlocked')) {
+    window.location.replace('/members-only/');
+  }
+</script>
+<noscript>
+  <p class="gate-guard-noscript">
+    This page is reserved for Jacksonville Links members.
+    <a href="/members-only/">Enter the chapter password</a> to continue.
+  </p>
+</noscript>
+
+<style>
+  .gate-guard-noscript {
+    max-width: 640px;
+    margin: 2rem auto;
+    padding: 1.25rem 1.5rem;
+    background: var(--color-cream-dim);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+</style>

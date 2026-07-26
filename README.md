@@ -44,7 +44,7 @@ A few things are intentionally placeholder pending real assets/copy from the cha
 - **Fundraisers page** — two sample event cards; real event data should replace the array in `src/pages/fundraisers.astro`.
 - **Members Only → Handbook / Calendar** — stub pages; the current live site keeps this content password-protected so it wasn't available to migrate.
 - **Contact form** — UI only, not yet wired to a backend (e.g. Formspree, Netlify Forms). The `mailto:` link works today as a fallback.
-- **Members Only password gate** — cosmetic UI only. Static sites can't enforce real access control; real member content should sit behind actual server-side auth before anything sensitive is published there.
+- **Members Only password gate** — cosmetic UI only. Static sites can't enforce real access control; real member content should sit behind actual server-side auth before anything sensitive is published there. The Handbook and Calendar pages redirect to the password screen if visited directly without unlocking it first (see `src/components/MembersGateGuard.astro`), but this is a JS redirect — the underlying HTML is still in the static build and reachable via view-source, curl, or with JS disabled.
 
 ## Environment variables
 
