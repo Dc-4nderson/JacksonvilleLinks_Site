@@ -2,41 +2,82 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import MembersGateGuard from '../../components/MembersGateGuard.astro';
+
+const contents = [
+  'Message from the President',
+  'About The Links, Incorporated',
+  'Chapter officers, charter members, and alumna members',
+  'Jacksonville Chapter local history',
+  'The five program facets: Services to Youth, The Arts, National Trends and Services, International Trends and Services, and Health and Human Services',
+  'Social & Courtesy guidelines and the 48-hour service requirement',
+  'Mentor/mentee guidance for new member inductees',
+  'Meeting guidelines, agendas, and Links attire',
+  'Committee lists, birthday calendar, hostess schedule, and membership directory',
+  'Chapter bylaws',
+];
 ---
 
 <Layout title="Chapter Handbook" description="Chapter Handbook for members of the Jacksonville (FL) Chapter of The Links, Incorporated.">
   <MembersGateGuard />
-  <PageHero eyebrow="Members Only" title="Chapter Handbook" />
+  <PageHero eyebrow="Members Only" title="Chapter Handbook" lede="The 2025–2027 Membership Handbook of the Jacksonville (FL) Chapter of The Links, Incorporated." />
 
   <section class="section">
-    <div class="container stub" data-reveal>
-      <p class="stub__badge">Placeholder — Members Only Content</p>
-      <h2>Coming Soon</h2>
-      <p class="lede">
-        This page is a placeholder for the Jacksonville Chapter Handbook. The original site
-        keeps this document password-protected, so its contents weren't available to pull into
-        this rebuild. Please provide the current handbook (PDF or document) so it can be
-        published or linked here.
-      </p>
-      <a href="/members-only/" class="btn btn--outline">&larr; Back to Members Only</a>
+    <div class="container handbook" data-reveal>
+      <div class="handbook__card">
+        <p class="eyebrow">What's Inside</p>
+        <ul class="handbook__list">
+          {contents.map((item) => <li>{item}</li>)}
+        </ul>
+        <a href="/documents/chapter-handbook.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+          View Chapter Handbook (PDF)
+        </a>
+      </div>
+      <a href="/members-only/" class="btn btn--outline back-link">&larr; Back to Members Only</a>
     </div>
   </section>
 </Layout>
 
 <style>
-  .stub {
-    max-width: 640px;
+  .handbook {
+    max-width: 720px;
   }
-  .stub__badge {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+
+  .handbook__card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: 2rem;
+  }
+
+  .handbook__list {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .handbook__list li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .handbook__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
     background: var(--color-gold);
-    color: var(--color-forest-deep);
-    padding: 0.4em 0.9em;
-    border-radius: 999px;
-    margin-bottom: 1.25rem;
+    transform: rotate(45deg);
+  }
+
+  .back-link {
+    display: inline-block;
   }
 </style>
