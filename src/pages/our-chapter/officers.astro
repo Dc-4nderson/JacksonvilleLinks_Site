@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
-import { NAV, OFFICERS } from '../../data/site';
+import { NAV, OFFICERS, LEGACY_TAGLINE } from '../../data/site';
 
 import presidentPortrait from '../../assets/images/president/portrait.jpg';
 import vicePresidentCard from '../../assets/images/officers/vice-president.jpg';
@@ -37,6 +37,8 @@ const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
 >
   <PageHero eyebrow="Our Chapter" title="2025–2026 Chapter Officers" />
   <SubNav items={ourChapterNav} />
+
+  <p class="legacy-tagline" data-reveal>{LEGACY_TAGLINE}</p>
 
   <section class="section">
     <div class="container">
@@ -88,6 +90,18 @@ const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
 </Layout>
 
 <style>
+  .legacy-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 600;
+    text-align: center;
+    color: var(--color-forest);
+    font-size: clamp(1.15rem, 1.6vw + 0.7rem, 1.6rem);
+    max-width: 46ch;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 0;
+  }
+
   .officer-section-spacer {
     margin-top: 3.5rem;
   }

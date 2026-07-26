@@ -3,8 +3,9 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/PageHero.astro';
 import SubNav from '../../components/SubNav.astro';
-import { NAV, SITE } from '../../data/site';
+import { NAV, SITE, OUR_CHAPTER_CONTENT } from '../../data/site';
 import chapterGroupPhoto from '../../assets/images/hero/chapter-conference-group.jpg';
+import nationalFounders from '../../assets/images/history/national-founders.jpg';
 
 const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 ---
@@ -24,6 +25,29 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
     <div class="container overview-grid">
       <div data-reveal>
         <Image
+          src={nationalFounders}
+          alt="The Links, Incorporated founders — Margaret Roselle Hawkins and Sarah Strickland Scott"
+          width={640}
+          height={480}
+          class="overview-photo"
+        />
+      </div>
+      <div data-reveal>
+        <p class="eyebrow">The Links, Incorporated</p>
+        <h2>An Enduring Sisterhood of Service</h2>
+        {OUR_CHAPTER_CONTENT.linksIncorporated.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight chapter-section">
+    <div class="container overview-grid overview-grid--reverse">
+      <div data-reveal>
+        <p class="eyebrow">The Jacksonville Chapter of The Links, Incorporated</p>
+        {OUR_CHAPTER_CONTENT.jacksonvilleChapter.map((p) => <p>{p}</p>)}
+      </div>
+      <div data-reveal>
+        <Image
           src={chapterGroupPhoto}
           alt="Jacksonville Links members gathered together at a chapter conference, dressed in green and white"
           width={640}
@@ -31,34 +55,21 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
           class="overview-photo"
         />
       </div>
-      <div data-reveal>
-        <p class="eyebrow">Who We Are</p>
-        <h2>An Enduring Sisterhood of Service</h2>
-        <p>
-          The Jacksonville (FL) Chapter of The Links, Incorporated was officially installed on
-          November 12, 1966 as the Southern Area's 27th chapter. Fifteen founding members
-          answered the call to bring the organization's mission of friendship and service to
-          Jacksonville — a legacy that our members continue to carry forward today.
-        </p>
-        <p>
-          Explore our chapter's story below: read a welcome from our president, trace our
-          history from 1966 to today, meet our officers, and browse our chapter, alumna, and
-          charter member rosters.
-        </p>
-      </div>
     </div>
   </section>
 
   <section class="section section--tight national-context">
     <div class="container">
-      <p class="eyebrow">Part of a National Sisterhood</p>
-      <p class="lede">
-        The Links, Incorporated was founded in 1946 by Margaret Hawkins and Sarah Scott of
-        Philadelphia, PA, and has grown into one of the nation's oldest and largest volunteer
-        service organizations. The Links Foundation, Incorporated — established in 1979 to
-        expand the organization's philanthropic work — has contributed more than $25 million
-        to charitable causes nationally.
-      </p>
+      <p class="eyebrow">The Links Foundation, Incorporated</p>
+      {OUR_CHAPTER_CONTENT.foundation.map((p) => <p class="lede">{p}</p>)}
+      <a
+        href={OUR_CHAPTER_CONTENT.visionLink.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--outline"
+      >
+        {OUR_CHAPTER_CONTENT.visionLink.label}
+      </a>
     </div>
   </section>
 
@@ -95,6 +106,10 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
     box-shadow: var(--shadow-card);
   }
 
+  .chapter-section {
+    background: var(--color-cream-dim);
+  }
+
   .national-context {
     border-top: 1px solid var(--color-line);
     border-bottom: 1px solid var(--color-line);
@@ -102,6 +117,11 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
 
   .national-context .lede {
     max-width: 72ch;
+    margin-bottom: 1.25rem;
+  }
+
+  .national-context .btn {
+    margin-top: 0.5rem;
   }
 
   .links-grid-section {
@@ -137,6 +157,9 @@ const ourChapterNav = NAV.find((n) => n.label === 'Our Chapter')!.children!;
   @media (min-width: 900px) {
     .overview-grid {
       grid-template-columns: 0.9fr 1.1fr;
+    }
+    .overview-grid--reverse {
+      grid-template-columns: 1.1fr 0.9fr;
     }
     .links-grid {
       grid-template-columns: repeat(3, 1fr);
