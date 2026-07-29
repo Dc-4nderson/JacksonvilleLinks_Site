@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../data/site';
+import saveTheDate from '../assets/images/fundraisers/60th-anniversary-save-the-date.jpg';
 ---
 
 <Layout
@@ -15,22 +17,49 @@ import { SITE } from '../data/site';
   />
 
   <section class="section">
-    <div class="container stub" data-reveal>
-      <p class="stub__badge">Coming Soon</p>
-      <h2>Event Details Coming Soon</h2>
-      <p class="lede">
-        We're finalizing details for upcoming chapter fundraisers, including the Western Gala.
-        Check back soon, or contact the chapter directly for the latest information.
-      </p>
-      <a href={`mailto:${SITE.email}`} class="btn btn--primary">Contact the Chapter</a>
+    <div class="container event" data-reveal>
+      <Image src={saveTheDate} alt="Save the Date — 60th Anniversary, Forever Linked, Forever Diamond" class="event__banner" />
+      <div class="event__body">
+        <p class="stub__badge">Save the Date</p>
+        <h2>60th Anniversary — Forever Linked, Forever Diamond</h2>
+        <p class="lede">Serving the community since 1966.</p>
+        <dl class="event__details">
+          <div>
+            <dt>Date</dt>
+            <dd>Saturday, November 14, 2026</dd>
+          </div>
+          <div>
+            <dt>Time</dt>
+            <dd>5:00 PM — Silent Auction Begins<br />6:00 PM — Program Begins</dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>World Golf Village Renaissance Resort<br />500 S Legacy Trail, St. Augustine, FL 32092</dd>
+          </div>
+        </dl>
+        <p>
+          More details on the Western Gala and other chapter fundraisers will be posted here as
+          they're confirmed. Contact the chapter directly for the latest information.
+        </p>
+        <a href={`mailto:${SITE.email}`} class="btn btn--primary">Contact the Chapter</a>
+      </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .stub {
-    max-width: 640px;
+  .event {
+    max-width: 760px;
   }
+
+  .event__banner {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 2rem;
+  }
+
   .stub__badge {
     display: inline-block;
     font-size: 0.72rem;
@@ -42,5 +71,34 @@ import { SITE } from '../data/site';
     padding: 0.4em 0.9em;
     border-radius: 999px;
     margin-bottom: 1.25rem;
+  }
+
+  .event__details {
+    display: grid;
+    gap: 1.25rem;
+    margin: 1.75rem 0;
+    padding: 1.5rem;
+    background: var(--color-cream-dim);
+    border-radius: var(--radius-md);
+  }
+
+  .event__details dt {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .event__details dd {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  @media (min-width: 560px) {
+    .event__details {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>
