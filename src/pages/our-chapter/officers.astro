@@ -111,7 +111,7 @@ const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
   }
 
@@ -120,9 +120,11 @@ const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
   }
 
   .officer-card__frame {
+    max-width: 340px;
+    margin-inline: auto;
     background: var(--color-emerald);
     border-radius: var(--radius-md);
-    padding: 0.9rem 0.9rem 1.25rem;
+    padding: 1.1rem 1.1rem 1.5rem;
     box-shadow: var(--shadow-card);
   }
 
@@ -141,16 +143,9 @@ const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
     margin-bottom: 0.15rem;
   }
 
-  .officer-card__frame p {
-    color: rgba(255, 255, 255, 0.85);
-    margin: 0;
-    font-weight: 600;
-    font-size: 0.88rem;
-  }
-
   .officer-card__graphic {
     width: 100%;
-    max-width: 260px;
+    max-width: 340px;
     margin-inline: auto;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-card);
@@ -174,5 +169,13 @@ const appointedOfficers = OFFICERS.filter((o) => o.group === 'appointed');
     font-size: 0.88rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+  }
+
+  .officer-card .officer-card__frame p {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-transform: none;
+    letter-spacing: normal;
   }
 </style>

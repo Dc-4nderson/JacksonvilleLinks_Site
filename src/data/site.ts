@@ -35,9 +35,9 @@ export const PRESIDENT_LETTER = {
   paragraphs: [
     'Welcome to the official website of the Jacksonville (FL) Chapter of The Links, Incorporated. I am delighted to extend my warmest greetings and heartfelt appreciation for your interest in our chapter and the impactful work we do.',
     'It is truly an honor and a privilege to serve as President of this dynamic and dedicated group of professional women. Since our official installation in 1966, the Jacksonville (FL) Chapter has upheld a proud legacy of service and sisterhood. Guided by the core values of friendship and service, we continue to develop programs and partnerships that uplift, inspire, and transform the communities we serve.',
-    'As a part of The Links, Incorporated—one of the nation’s oldest and largest volunteer service organizations, comprising over 17,000 accomplished women in 299 chapters across 41 states, the District of Columbia, the Commonwealth of the Bahamas, and the United Kingdom—we are proud to implement impactful initiatives in five key facets: Services to Youth, The Arts, National Trends and Services, International Trends and Services, and Health and Human Services.',
+    'As a part of The Links, Incorporated (one of the nation’s oldest and largest volunteer service organizations, comprising over 17,000 accomplished women in 299 chapters across 41 states, the District of Columbia, the Commonwealth of the Bahamas, and the United Kingdom), we are proud to implement impactful initiatives in five key facets: Services to Youth, The Arts, National Trends and Services, International Trends and Services, and Health and Human Services.',
     'In alignment with our national mission, the Jacksonville (FL) Chapter is committed to delivering transformative programming that promotes educational excellence, cultural awareness, health equity, civic engagement, and global understanding. Whether we are mentoring future leaders, supporting local artists, addressing community health disparities, or fostering international goodwill, we do so with integrity, purpose, and an unwavering commitment to excellence.',
-    'I invite you to explore our website to learn more about our work, our impact, and our vision for the future. We welcome opportunities for community collaboration and encourage you to join us as we continue to make a meaningful difference—together.',
+    'I invite you to explore our website to learn more about our work, our impact, and our vision for the future. We welcome opportunities for community collaboration and encourage you to join us as we continue to make a meaningful difference, together.',
     'Thank you again for visiting. Your support and engagement are vital to our continued success.',
   ],
   closing: 'In Friendship and Service,',
@@ -124,7 +124,7 @@ export const FACETS: Facet[] = [
     },
     mission: 'Services to Youth takes an integrated approach to the academic, health, cultural, social awareness, career development, and mentoring needs of the young people in our community.',
     highlights: [
-      'GEMS — Girls Empowered and Motivated to Succeed',
+      'GEMS: Girls Empowered and Motivated to Succeed',
       'Project LEAD: High Expectations',
       'Little Sisters of Links mentoring program',
       'Great Girls + Great Books = Great Readers Program',
@@ -137,16 +137,16 @@ export const FACETS: Facet[] = [
       'STEAM activities for School of Success Middle Academy',
     ],
     paragraphs: [
-      'Services to Youth was The Links, Incorporated’s first program, established to equip Black youth with the intellectual and achievement-oriented tools to become successful, productive citizens. It remains rooted in an integrated approach that addresses the academic, health, cultural, social awareness, career development, and mentoring needs of the young people we serve — including active, healthy living, since children who stay active see greater school success and self-esteem.',
+      'Services to Youth was The Links, Incorporated’s first program, established to equip Black youth with the intellectual and achievement-oriented tools to become successful, productive citizens. It remains rooted in an integrated approach that addresses the academic, health, cultural, social awareness, career development, and mentoring needs of the young people we serve, including active, healthy living, since children who stay active see greater school success and self-esteem.',
       'Our chapter has a long history of hands-on programming, from Project LEAD: High Expectations and the Little Sisters of Links mentoring program, to literacy initiatives like Great Girls + Great Books = Great Readers, to cultural enrichment through Ritz Museum tours and Nutcracker Ballet sponsorships.',
       'Recent goals include a partnership with the Links-NSBE Jr. Club, monthly mentoring, STEAM career development, college readiness programming, financial literacy instruction, HBCU promotion, and college scholarship awards.',
     ],
     image: literacyAllianceFlyerThumbnail,
-    imageAlt: 'Literacy Alliance of Northeast Florida flyer — Free Adult Education: reading classes, math classes, and high school equivalency diploma prep',
+    imageAlt: 'Literacy Alliance of Northeast Florida flyer, Free Adult Education: reading classes, math classes, and high school equivalency diploma prep',
     resources: [
       {
         name: 'Literacy Alliance of Northeast Florida',
-        description: 'Free adult education for learners 16 and up — reading and math classes, one-on-one tutoring, and preparation for a high school equivalency diploma. Classes meet at the duPont Center or online.',
+        description: 'Free adult education for learners 16 and up, reading and math classes, one-on-one tutoring, and preparation for a high school equivalency diploma. Classes meet at the duPont Center or online.',
         contact: '40 East Adams Street, Jacksonville, FL · (904) 238-9000',
         ctaLabel: 'View Flyer (PDF)',
         ctaHref: '/documents/literacy-alliance-flyer.pdf',
@@ -167,9 +167,9 @@ export const FACETS: Facet[] = [
     ],
     paragraphs: [
       'The Links, Incorporated’s support of the arts can be traced to our cultured co-founder Margaret Roselle Hawkins. Her innate artistic talent, discovered at a young age, earned her a four-year scholarship to the Women’s School of Design, later known as the Moore Institute of Art. Her passion for creative expression later led to her appointment as an art teacher, and helped give root to the establishment of The Arts facet in 1964 at the 14th National Assembly.',
-      'The goal of The Arts facet is to produce and support programs to enrich the quality of life of our youth and communities through educational and engaging art experiences — Transforming Communities and Fulfilling Our Purpose.',
+      'The goal of The Arts facet is to produce and support programs to enrich the quality of life of our youth and communities through educational and engaging art experiences: Transforming Communities and Fulfilling Our Purpose.',
       'National Signature Arts Program Summary: Classics Through The Ages focuses on increasing the interest, knowledge, and participation of African-American youth in the classical arts, affording exemplary student artists opportunities to hone their skills and earn recognition and support for their educational and career pursuits. The National Poster Art Contest includes health-related themes, seeking to depict healthy, energetic, active lifestyles.',
-      'Taking STEM into STEAM brings art into the educational mix — helping students learn that there are multiple ways to reach a conclusion, garner greater flexibility in how they learn, and gain deeper understanding for problem solving. Past projects have included partnerships with symphonies and Connecting Threads through quilt making. Artist Noir, modeled after Classics Through The Ages, includes literary, theater, and visual arts, encouraging multi-arts disciplines such as watercolors, fashion design, sculpture, drama, spoken word, and dance.',
+      'Taking STEM into STEAM brings art into the educational mix, helping students learn that there are multiple ways to reach a conclusion, garner greater flexibility in how they learn, and gain deeper understanding for problem solving. Past projects have included partnerships with symphonies and Connecting Threads through quilt making. Artist Noir, modeled after Classics Through The Ages, includes literary, theater, and visual arts, encouraging multi-arts disciplines such as watercolors, fashion design, sculpture, drama, spoken word, and dance.',
     ],
   },
   {
@@ -188,7 +188,7 @@ export const FACETS: Facet[] = [
       'In 2016, the Jacksonville Chapter encouraged the community to take an active role in the presidential election process by sponsoring voter registration drives at Florida’s first HBCU, Edward Waters College. Facet Chair LaVonne Mitchell led the campaign at the Schell-Sweet Center on campus, registering new voters alongside fellow chapter members. The facet also partners with Operation New Hope on the Adopt A Child Project, providing holiday gifts and celebrations for underprivileged children.',
     ],
     image: nobleFlyer,
-    imageAlt: 'The Law and Your Community flyer — a NOBLE training on interacting with law enforcement, held February 3, 2024 at Edward Waters University',
+    imageAlt: 'The Law and Your Community flyer, a NOBLE training on interacting with law enforcement, held February 3, 2024 at Edward Waters University',
     resources: [
       {
         name: 'The Law and Your Community®',
@@ -234,7 +234,7 @@ export const FACETS: Facet[] = [
       'Walk for Healthy Living',
     ],
     paragraphs: [
-      'Health and Human Services was established to address the chronic health disparities that persist in our communities and result in the decreased life expectancy of African Americans — with a focus on cardiovascular disease, breast cancer, organ/tissue/blood donation, and childhood obesity.',
+      'Health and Human Services was established to address the chronic health disparities that persist in our communities and result in the decreased life expectancy of African Americans, with a focus on cardiovascular disease, breast cancer, organ/tissue/blood donation, and childhood obesity.',
       'HeartLinks to Heart Health engages the community to take an aggressive stance against heart disease. Linkages to Life educates the African-American community about the importance of organ, tissue, and bone marrow donation. Walk for Healthy Living promotes daily exercise and nutrition through events like the Heart Walk and Susan G. Komen Walk.',
       'In 2015–2016, the Jacksonville Chapter provided assistance to the Schell-Sweet Community Center and Clinic on the campus of Edward Waters College, and continues to develop mental health stigma reduction efforts and healthy-choice programming for youth.',
     ],
