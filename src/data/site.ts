@@ -8,8 +8,6 @@ import internationalTrendsHaiti from '../assets/images/facets/international-tren
 import internationalTrendsNigeria from '../assets/images/facets/international-trends-services/gems-speaker-nigeria.jpg';
 import internationalTrendsBahamas from '../assets/images/facets/international-trends-services/gems-speaker-bahamas.jpg';
 import internationalTrendsCarePackages from '../assets/images/facets/international-trends-services/haiti-care-packages.jpg';
-import nobleFlyer from '../assets/images/facets/national-trends/noble-law-and-your-community-flyer.jpg';
-import literacyAllianceFlyerThumbnail from '../assets/images/facets/services-to-youth/literacy-alliance-flyer-thumbnail.jpg';
 import itsCommitteeCollage from '../assets/images/facets/international-trends-services/its-committee-collage.webp';
 import internationalHeritagePortrait from '../assets/images/facets/international-trends-services/international-heritage-portrait.webp';
 import chapterMeeting from '../assets/images/hero/chapter-meeting.jpg';
@@ -141,17 +139,6 @@ export const FACETS: Facet[] = [
       'Our chapter has a long history of hands-on programming, from Project LEAD: High Expectations and the Little Sisters of Links mentoring program, to literacy initiatives like Great Girls + Great Books = Great Readers, to cultural enrichment through Ritz Museum tours and Nutcracker Ballet sponsorships.',
       'Recent goals include a partnership with the Links-NSBE Jr. Club, monthly mentoring, STEAM career development, college readiness programming, financial literacy instruction, HBCU promotion, and college scholarship awards.',
     ],
-    image: literacyAllianceFlyerThumbnail,
-    imageAlt: 'Literacy Alliance of Northeast Florida flyer, Free Adult Education: reading classes, math classes, and high school equivalency diploma prep',
-    resources: [
-      {
-        name: 'Literacy Alliance of Northeast Florida',
-        description: 'Free adult education for learners 16 and up, reading and math classes, one-on-one tutoring, and preparation for a high school equivalency diploma. Classes meet at the duPont Center or online.',
-        contact: '40 East Adams Street, Jacksonville, FL · (904) 238-9000',
-        ctaLabel: 'View Flyer (PDF)',
-        ctaHref: '/documents/literacy-alliance-flyer.pdf',
-      },
-    ],
   },
   {
     slug: 'the-arts',
@@ -186,14 +173,6 @@ export const FACETS: Facet[] = [
       'National Trends and Services designs community programs that increase awareness of issues affecting the quality of life for African Americans, addressing economic and social inequalities in education, income, health, and employment.',
       'Vision: eliminate disparities by reducing barriers to services through advocacy, education, and service. Mission: empower our chapters to effectively uplift the communities in which we work. Goals: increase the number of sustainable and measurable programs, deepen collaborative partnerships, and extend our initiatives into the communities with the greatest need.',
       'In 2016, the Jacksonville Chapter encouraged the community to take an active role in the presidential election process by sponsoring voter registration drives at Florida’s first HBCU, Edward Waters College. Facet Chair LaVonne Mitchell led the campaign at the Schell-Sweet Center on campus, registering new voters alongside fellow chapter members. The facet also partners with Operation New Hope on the Adopt A Child Project, providing holiday gifts and celebrations for underprivileged children.',
-    ],
-    image: nobleFlyer,
-    imageAlt: 'The Law and Your Community flyer, a NOBLE training on interacting with law enforcement, held February 3, 2024 at Edward Waters University',
-    resources: [
-      {
-        name: 'The Law and Your Community®',
-        description: 'A NOBLE (National Organization of Black Law Enforcement Executives) training held at Edward Waters University in February 2024, helping youth and their parents/guardians learn how to interact with local law enforcement. Chapter contact: Dr. Keshan Hargrove.',
-      },
     ],
   },
   {
