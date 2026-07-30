@@ -43,7 +43,7 @@ A few things are intentionally placeholder pending real assets/copy from the cha
 - **All photography** — green-gradient blocks watermarked "Placeholder," each labeled with what real photo belongs there. Replace by swapping `<PlaceholderImage>` usages for real `<img>`/`<Image>` tags once photos are supplied.
 - **Fundraisers page** — two sample event cards; real event data should replace the array in `src/pages/fundraisers.astro`.
 - **Members Only → Handbook / Calendar** — stub pages; the current live site keeps this content password-protected so it wasn't available to migrate.
-- **Contact form** — wired to Formspree (form ID `maqranlp`) via `@formspree/ajax`; submissions email the chapter and show an inline success/error message. The `mailto:` link remains as an alternate way to reach the chapter.
+- **Contact form** — wired to Formspree (form ID `mwvgzapy`) via `@formspree/ajax`; submissions email the chapter and show an inline success/error message. The `mailto:` link remains as an alternate way to reach the chapter.
 - **Members Only password gate** — cosmetic UI only. Static sites can't enforce real access control; real member content should sit behind actual server-side auth before anything sensitive is published there. The Handbook and Calendar pages redirect to the password screen if visited directly without unlocking it first (see `src/components/MembersGateGuard.astro`), but this is a JS redirect — the underlying HTML is still in the static build and reachable via view-source, curl, or with JS disabled.
 
 ## Environment variables
