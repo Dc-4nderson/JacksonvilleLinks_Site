@@ -3,6 +3,7 @@
 import type { ImageMetadata } from 'astro';
 import healthHumanServicesImage from '../assets/images/facets/health-and-human-services/schell-sweet-banner.jpg';
 import healthHumanServicesRibbonCutting from '../assets/images/facets/health-and-human-services/ribbon-cutting.jpg';
+import healthHumanServicesFoodDrive from '../assets/images/facets/health-and-human-services/food-drive-packing.png';
 import internationalTrendsImage from '../assets/images/facets/international-trends-services/gems-cuisine-tasting.jpg';
 import internationalTrendsHaiti from '../assets/images/facets/international-trends-services/gems-speaker-haiti.jpg';
 import internationalTrendsNigeria from '../assets/images/facets/international-trends-services/gems-speaker-nigeria.jpg';
@@ -10,6 +11,10 @@ import internationalTrendsBahamas from '../assets/images/facets/international-tr
 import internationalTrendsCarePackages from '../assets/images/facets/international-trends-services/haiti-care-packages.jpg';
 import itsCommitteeCollage from '../assets/images/facets/international-trends-services/its-committee-collage.webp';
 import internationalHeritagePortrait from '../assets/images/facets/international-trends-services/international-heritage-portrait.webp';
+import internationalTrendsNewPhoto from '../assets/images/facets/international-trends-services/its-new-photo.png';
+import nationalTrendsImage from '../assets/images/facets/national-trends/roar-registration-table.png';
+import servicesToYouthImage from '../assets/images/facets/services-to-youth/student-group-visit.png';
+import theArtsImage from '../assets/images/facets/the-arts/the-arts-photo.png';
 import chapterMeeting from '../assets/images/hero/chapter-meeting.jpg';
 
 export const SITE = {
@@ -139,6 +144,8 @@ export const FACETS: Facet[] = [
       'Our chapter has a long history of hands-on programming, from Project LEAD: High Expectations and the Little Sisters of Links mentoring program, to literacy initiatives like Great Girls + Great Books = Great Readers, to cultural enrichment through Ritz Museum tours and Nutcracker Ballet sponsorships.',
       'Recent goals include a partnership with the Links-NSBE Jr. Club, monthly mentoring, STEAM career development, college readiness programming, financial literacy instruction, HBCU promotion, and college scholarship awards.',
     ],
+    image: servicesToYouthImage,
+    imageAlt: 'Jacksonville Links members with a group of students during a Services to Youth program visit',
   },
   {
     slug: 'the-arts',
@@ -158,6 +165,8 @@ export const FACETS: Facet[] = [
       'National Signature Arts Program Summary: Classics Through The Ages focuses on increasing the interest, knowledge, and participation of African-American youth in the classical arts, affording exemplary student artists opportunities to hone their skills and earn recognition and support for their educational and career pursuits. The National Poster Art Contest includes health-related themes, seeking to depict healthy, energetic, active lifestyles.',
       'Taking STEM into STEAM brings art into the educational mix, helping students learn that there are multiple ways to reach a conclusion, garner greater flexibility in how they learn, and gain deeper understanding for problem solving. Past projects have included partnerships with symphonies and Connecting Threads through quilt making. Artist Noir, modeled after Classics Through The Ages, includes literary, theater, and visual arts, encouraging multi-arts disciplines such as watercolors, fashion design, sculpture, drama, spoken word, and dance.',
     ],
+    image: theArtsImage,
+    imageAlt: 'Jacksonville Links members at a chapter event for The Arts facet',
   },
   {
     slug: 'national-trends',
@@ -174,6 +183,8 @@ export const FACETS: Facet[] = [
       'Vision: eliminate disparities by reducing barriers to services through advocacy, education, and service. Mission: empower our chapters to effectively uplift the communities in which we work. Goals: increase the number of sustainable and measurable programs, deepen collaborative partnerships, and extend our initiatives into the communities with the greatest need.',
       'In 2016, the Jacksonville Chapter encouraged the community to take an active role in the presidential election process by sponsoring voter registration drives at Florida’s first HBCU, Edward Waters College. Facet Chair LaVonne Mitchell led the campaign at the Schell-Sweet Center on campus, registering new voters alongside fellow chapter members. The facet also partners with Operation New Hope on the Adopt A Child Project, providing holiday gifts and celebrations for underprivileged children.',
     ],
+    image: nationalTrendsImage,
+    imageAlt: 'Jacksonville Links members at a National Trends and Services community registration table',
   },
   {
     slug: 'international-trends-services',
@@ -199,6 +210,7 @@ export const FACETS: Facet[] = [
       { src: internationalTrendsCarePackages, alt: 'Jacksonville Links members preparing individually labeled care packages for orphans in Cazeau, Haiti' },
       { src: itsCommitteeCollage, alt: 'International Trends & Services committee members, with photos from the chapter’s Bahamas outreach and International Tea' },
       { src: internationalHeritagePortrait, alt: 'Traditional West African-inspired attire and jewelry, reflecting the cultural connection central to International Trends & Services programming' },
+      { src: internationalTrendsNewPhoto, alt: 'Jacksonville Links members at an International Trends & Services event' },
     ],
   },
   {
@@ -223,6 +235,7 @@ export const FACETS: Facet[] = [
     gallery: [
       { src: healthHumanServicesRibbonCutting, alt: 'Jacksonville Links members and community partners at a ribbon-cutting ceremony' },
       { src: chapterMeeting, alt: 'Jacksonville Links members at a chapter meeting' },
+      { src: healthHumanServicesFoodDrive, alt: 'Jacksonville Links members packing food donation bags at a community food drive' },
     ],
   },
 ];
