@@ -11,18 +11,22 @@ const slides = [
   {
     src: chapterWhiteAttireGroup,
     alt: 'Jacksonville Links members in white attire gathered together outdoors',
+    position: 'center 22%',
   },
   {
     src: chapterPodiumAddress,
     alt: 'A Jacksonville Links member addressing chapter members from a podium at a white-attire event',
+    position: 'center 78%',
   },
   {
     src: chapterOfficersLakesideGroup,
     alt: 'Jacksonville Links officers in white attire posing together beside a lake',
+    position: 'center 38%',
   },
   {
     src: chapterCommitteeLakesideGroup,
     alt: 'Jacksonville Links members in white attire posing together beside a lake',
+    position: 'center 48%',
   },
 ];
 ---
@@ -36,6 +40,7 @@ const slides = [
           alt={slide.alt}
           width={1600}
           class="hero__slide-img"
+          style={`object-position: ${slide.position};`}
           loading={i === 0 ? 'eager' : 'lazy'}
           fetchpriority={i === 0 ? 'high' : 'auto'}
         />
